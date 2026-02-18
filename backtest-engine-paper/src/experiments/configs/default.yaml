@@ -1,0 +1,48 @@
+universe:
+  symbols: [SPY, QQQ, IWM, DIA, XLF, XLK, XLE, XLV, XLY, XLP]
+
+data:
+  processed_dir: data/processed
+
+portfolio:
+  initial_cash: 100000
+  target_weight: 1.0
+  max_weight: 1.0
+
+periods:
+  - {name: full, start: 2005-01-01, end: 2025-12-31}
+  - {name: pre_gfc_to_gfc, start: 2005-01-01, end: 2012-12-31}
+  - {name: mid_cycle, start: 2013-01-01, end: 2019-12-31}
+  - {name: covid_and_after, start: 2020-01-01, end: 2025-12-31}
+
+strategies:
+  - name: tsmom_60
+    type: TimeSeriesMomentum
+    params: {lookback: 60}
+  - name: meanrev_z1
+    type: MeanReversionZ
+    params: {window: 20, z_enter: 1.0}
+
+execution_models:
+  - name: naive
+    params: {fee_bps: 0.0, half_spread_bps: 0.0, vol_k: 0.0, impact_k: 0.0, delay_days: 1, participation_rate: 1.0}
+  - name: fees_5bps
+    params: {fee_bps: 5.0, half_spread_bps: 0.0, vol_k: 0.0, impact_k: 0.0, delay_days: 1, participation_rate: 1.0}
+  - name: spread_10bps
+    params: {fee_bps: 5.0, half_spread_bps: 5.0, vol_k: 0.0, impact_k: 0.0, delay_days: 1, participation_rate: 1.0}
+  - name: vol_slip
+    params: {fee_bps: 5.0, half_spread_bps: 5.0, vol_k: 10.0, impact_k: 0.0, delay_days: 1, participation_rate: 1.0}
+  - name: impact_proxy
+    params: {fee_bps: 5.0, half_spread_bps: 5.0, vol_k: 10.0, impact_k: 0.50, delay_days: 1, participation_rate: 0.05}
+  - name: delay_2d
+    params: {fee_bps: 5.0, half_spread_bps: 5.0, vol_k: 10.0, impact_k: 0.50, delay_days: 2, participation_rate: 0.05}
+
+logging:
+  enable_event_log: false
+
+bootstrap:
+  n_samples: 500
+  block_size: 10
+
+outputs:
+  out_dir: outputs

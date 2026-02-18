@@ -1,0 +1,46 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\title{Backtest Engineering: Building a Correct Event-Driven Research Engine and Quantifying Bias from Simplifications}
+\author{Srijan Gupta}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Backtesting is the primary empirical tool used to evaluate systematic trading strategies, yet common research shortcuts—such as next-bar fills, ignoring bid--ask spread, or assuming instantaneous execution—can materially inflate performance estimates. We present a minimal event-driven backtesting engine designed around explicit causality constraints (“as-of” data access), accounting invariants, and a strict event queue (\texttt{Market $\rightarrow$ Signal $\rightarrow$ Order $\rightarrow$ Fill}). The engine supports a ladder of execution realism (fees, spread, volatility-scaled slippage, impact proxy, and delayed execution) and includes partial-fill and cash-constraint mechanisms suitable for long-only research. Using daily Stooq data for liquid ETFs and canonical strategies, we quantify how performance metrics shift as execution assumptions become more realistic. We report systematic “inflation ratios” between naïve and realistic assumptions and provide a reproducible reference implementation, test suite, and experiment harness (including period splits and bootstrap confidence intervals) to support more trustworthy strategy research.
+\end{abstract}
+
+\section{Introduction}
+Backtests are the de facto empirical tool for systematic strategy research. However, many backtests rely on simplifying execution assumptions (e.g., next-bar fills at mid prices, no spread, no slippage, instantaneous fills) that can materially bias reported performance. Event-driven systems process market events sequentially and align more closely with live trading workflows, making execution assumptions explicit and testable.
+
+\section{Engine Design}
+\subsection{Event Queue and Interfaces}
+We implement a strict FIFO queue that processes \texttt{MarketEvent}, \texttt{SignalEvent}, \texttt{OrderEvent}, and \texttt{FillEvent} in order. A \texttt{DataHandler} enforces causality by only providing history as-of time $t$.
+
+\subsection{Correctness Invariants}
+We validate key invariants via unit tests: (i) accounting identity (equity equals cash plus marked-to-market positions), (ii) causality (no future data), (iii) fill consistency (filled quantity never exceeds ordered quantity), and (iv) cost monotonicity (adding costs cannot improve performance in controlled settings).
+
+\section{Execution Realism Ladder}
+We evaluate a ladder of increasingly realistic execution assumptions: naïve next-open fills, fees, spread, volatility-scaled slippage, an impact proxy based on participation relative to ADV, and delayed execution. We additionally include a partial-fill mechanism that caps filled quantity as a fraction of ADV shares.
+
+\section{Experimental Setup}
+We use daily OHLCV data from Stooq for a liquid ETF universe. Experiments are configured via YAML and include period-split evaluation and block-bootstrap confidence intervals for Sharpe.
+
+\section{Results}
+All tables/figures are generated under \texttt{outputs/}. Key plots include average Sharpe by execution model and Sharpe inflation ratios.
+
+\section{Limitations and Ethics}
+Daily-bar backtests cannot represent full microstructure effects (queue priority, LOB dynamics). Results should be interpreted as methodological evidence about bias from simplifying assumptions, not as investable performance claims.
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}
