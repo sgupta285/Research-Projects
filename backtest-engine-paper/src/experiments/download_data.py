@@ -6,33 +6,30 @@ import pandas as pd
 
 from src.utils.io import ensure_dir
 
-STOOQ_DAILY_URL = "https://stooq.com/q/d/l/?s={sym}&i=d"
 
+def fetch_yfinance(symbol: str, start: str) -> pd.DataFrame:
+    """Fetch daily OHLCV from Yahoo Finance via yfinance."""
+    try:
+        import yfinance as yf
+    except ImportError:
+        raise ImportError("yfinance is not installed. Run: pip install yfinance")
 
-def fetch_stooq_daily(symbol: str) -> pd.DataFrame:
-    """Fetch daily OHLCV from Stooq for a symbol."""
-    # US tickers usually work in lowercase on Stooq.
-    for sym in [symbol.lower(), symbol]:
-        url = STOOQ_DAILY_URL.format(sym=sym)
-        try:
-            df = pd.read_csv(url)
-            if len(df) > 0:
-                break
-        except Exception:
-            df = None
+    ticker = yf.Ticker(symbol)
+    df = ticker.history(start=start, auto_adjust=True)
+
     if df is None or len(df) == 0:
-        raise RuntimeError(f"Failed to fetch data from Stooq for {symbol}")
+        raise RuntimeError(f"yfinance returned no data for {symbol}")
 
     df = df.rename(columns={
-        "Date": "t",
         "Open": "open",
         "High": "high",
         "Low": "low",
         "Close": "close",
         "Volume": "volume",
     })
-    df["t"] = pd.to_datetime(df["t"])
-    df = df.set_index("t").sort_index()
+    df.index = pd.to_datetime(df.index).tz_localize(None)
+    df.index.name = "t"
+    df = df[["open", "high", "low", "close", "volume"]].copy()
     for c in ["open", "high", "low", "close", "volume"]:
         df[c] = pd.to_numeric(df[c], errors="coerce")
     df = df.dropna(subset=["open", "high", "low", "close"])
@@ -47,13 +44,12 @@ def main():
     ap.add_argument("--processed_dir", type=str, default="data/processed")
     args = ap.parse_args()
 
-    start = pd.to_datetime(args.start)
     ensure_dir(args.raw_dir)
     ensure_dir(args.processed_dir)
 
     for sym in args.symbols:
-        df = fetch_stooq_daily(sym)
-        df = df.loc[df.index >= start].copy()
+        print(f"Downloading {sym}...")
+        df = fetch_yfinance(sym, args.start)
 
         raw_path = os.path.join(args.raw_dir, f"{sym}.csv")
         df.to_csv(raw_path, index=True)
@@ -61,7 +57,7 @@ def main():
         processed_path = os.path.join(args.processed_dir, f"{sym}.csv")
         df.reset_index().to_csv(processed_path, index=False)
 
-        print(f"[OK] {sym}: {len(df)} rows -> {raw_path} / {processed_path}")
+        print(f"  [OK] {sym}: {len(df)} rows -> {processed_path}")
 
 
 if __name__ == "__main__":

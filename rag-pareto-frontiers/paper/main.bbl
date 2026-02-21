@@ -1,0 +1,178 @@
+\begin{thebibliography}{22}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Asai et~al.(2024)Asai, Wu, Wang, Sil, and Hajishirzi]{asai2024selfrag}
+Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and Hannaneh Hajishirzi.
+\newblock Self-{RAG}: Learning to retrieve, generate, and critique through
+  self-reflection.
+\newblock \emph{arXiv preprint arXiv:2310.11511}, 2024.
+
+\bibitem[Chen et~al.(2024{\natexlab{a}})Chen, Xiao, Zhang, Luo, Lian, and
+  Liu]{chen2024bge}
+Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu Lian, and Zheng Liu.
+\newblock {BGE} m3-embedding: Multi-lingual, multi-functionality,
+  multi-granularity text embeddings through self-knowledge distillation.
+\newblock In \emph{arXiv preprint arXiv:2309.07597}, 2024{\natexlab{a}}.
+
+\bibitem[Chen et~al.(2024{\natexlab{b}})Chen, Ye, Wu, Zheng, Ceze, and
+  Krishnamurthy]{chen2023accel}
+Lequn Chen, Zihao Ye, Yongji Wu, Danyang Zheng, Luis Ceze, and Arvind
+  Krishnamurthy.
+\newblock Punica: Multi-tenant {LoRA} serving.
+\newblock In \emph{Proceedings of Machine Learning and Systems (MLSys)},
+  2024{\natexlab{b}}.
+
+\bibitem[Es et~al.(2023)Es, James, Espinosa-Anke, and Schockaert]{es2023ragas}
+Shahul Es, Jithin James, Luis Espinosa-Anke, and Steven Schockaert.
+\newblock {RAGAS}: Automated evaluation of retrieval augmented generation.
+\newblock \emph{arXiv preprint arXiv:2309.15217}, 2023.
+
+\bibitem[Guha et~al.(2023)Guha, Nyarko, Ho, R\'{e}, Chilton, Chohlas-Wood,
+  Peters, Waldon, Rockmore, Zambrano, et~al.]{guha2023legalbench}
+Neel Guha, Julian Nyarko, Daniel~E. Ho, Christopher R\'{e}, Adam Chilton, Alex
+  Chohlas-Wood, Austin Peters, Brandon Waldon, Daniel~N. Rockmore, Diego
+  Zambrano, et~al.
+\newblock {LegalBench}: A collaboratively built benchmark for measuring legal
+  reasoning in large language models.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, 2023.
+
+\bibitem[Hofst\"{a}tter et~al.(2022)Hofst\"{a}tter, Lin, Yang, Lin, and
+  Hanbury]{hofstaetter2022efficiently}
+Sebastian Hofst\"{a}tter, Sheng-Chieh Lin, Jheng-Hong Yang, Jimmy Lin, and
+  Allan Hanbury.
+\newblock Efficiently teaching an effective dense retriever with balanced topic
+  aware sampling.
+\newblock In \emph{Proceedings of the 44th International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, pages 113--122. ACM,
+  2022.
+
+\bibitem[Karpukhin et~al.(2020)Karpukhin, O\u{g}uz, Min, Lewis, Wu, Edunov,
+  Chen, and Yih]{karpukhin2020dpr}
+Vladimir Karpukhin, Barlas O\u{g}uz, Sewon Min, Patrick Lewis, Ledell Wu,
+  Sergey Edunov, Danqi Chen, and Wen-tau Yih.
+\newblock Dense passage retrieval for open-domain question answering.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 6769--6781, Online, 2020.
+  Association for Computational Linguistics.
+
+\bibitem[Kim et~al.(2023)Kim, Hooper, Wattanawong, Kang, Yan, Genc, Dinh,
+  Huang, Keutzer, Mahoney, et~al.]{kim2023full}
+Sehoon Kim, Coleman Hooper, Thanakul Wattanawong, Minwoo Kang, Ruohan Yan,
+  Hasan Genc, Clark Dinh, Qijing Huang, Kurt Keutzer, Michael~W. Mahoney,
+  et~al.
+\newblock Full stack optimization of transformer inference: a survey.
+\newblock In \emph{arXiv preprint arXiv:2302.14017}, 2023.
+
+\bibitem[Lewis et~al.(2020)Lewis, Perez, Piktus, Petroni, Karpukhin, Goyal,
+  K\"{u}ttler, Lewis, Yih, Rockt\"{a}schel, Riedel, and Kiela]{lewis2020rag}
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
+  Karpukhin, Naman Goyal, Heinrich K\"{u}ttler, Mike Lewis, Wen-tau Yih, Tim
+  Rockt\"{a}schel, Sebastian Riedel, and Douwe Kiela.
+\newblock Retrieval-augmented generation for knowledge-intensive {NLP} tasks.
+\newblock In \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, volume~33, pages 9459--9474, 2020.
+
+\bibitem[Lin et~al.(2022)Lin, Ma, and Lin]{lin2022aggretriever}
+Sheng-Chieh Lin, Minghan Ma, and Jimmy Lin.
+\newblock Aggretriever: A simple approach to aggregate textual representations
+  for robust dense passage retrieval.
+\newblock In \emph{arXiv preprint arXiv:2208.00511}, 2022.
+
+\bibitem[Ma et~al.(2023)Ma, Gong, He, Zhao, and Duan]{ma2023query}
+Xinbei Ma, Yeyun Gong, Pengcheng He, Hai Zhao, and Nan Duan.
+\newblock Query rewriting in retrieval-augmented large language models.
+\newblock In \emph{Proceedings of the 2023 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 5303--5315, Singapore, 2023.
+  Association for Computational Linguistics.
+
+\bibitem[Muennighoff et~al.(2023)Muennighoff, Tazi, Magne, and
+  Reimers]{muennighoff2023mteb}
+Niklas Muennighoff, Nouamane Tazi, Lo{\"i}c Magne, and Nils Reimers.
+\newblock {MTEB}: Massive text embedding benchmark.
+\newblock In \emph{Proceedings of the 17th Conference of the European Chapter
+  of the Association for Computational Linguistics (EACL)}, pages 2014--2037,
+  Dubrovnik, Croatia, 2023. Association for Computational Linguistics.
+
+\bibitem[Nogueira and Cho(2019)]{nogueira2019passage}
+Rodrigo Nogueira and Kyunghyun Cho.
+\newblock Passage re-ranking with {BERT}.
+\newblock In \emph{arXiv preprint arXiv:1901.04085}, 2019.
+
+\bibitem[Reimers and Gurevych(2019)]{reimers2019sbert}
+Nils Reimers and Iryna Gurevych.
+\newblock Sentence-{BERT}: Sentence embeddings using {S}iamese {BERT}-networks.
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 3982--3992, Hong Kong, China,
+  2019. Association for Computational Linguistics.
+
+\bibitem[Robertson and Zaragoza(2009)]{robertson2009bm25}
+Stephen Robertson and Hugo Zaragoza.
+\newblock The probabilistic relevance framework: {BM25} and beyond.
+\newblock \emph{Foundations and Trends in Information Retrieval}, 3\penalty0
+  (4):\penalty0 333--389, 2009.
+
+\bibitem[Santhanam et~al.(2022)Santhanam, Khattab, Potts, and
+  Zaharia]{santhanam2022plaid}
+Keshav Santhanam, Omar Khattab, Christopher Potts, and Matei Zaharia.
+\newblock {PLAID}: An efficient engine for late interaction retrieval.
+\newblock In \emph{Proceedings of the 31st ACM International Conference on
+  Information and Knowledge Management (CIKM)}, pages 1747--1756. ACM, 2022.
+
+\bibitem[Shao et~al.(2023)Shao, Gong, Shen, Huang, Duan, and
+  Chen]{shao2023iter}
+Zhihong Shao, Yeyun Gong, Yelong Shen, Minlie Huang, Nan Duan, and Weizhu Chen.
+\newblock Enhancing retrieval-augmented large language models with iterative
+  retrieval-generation synergy.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2023}, pages 9248--9274. Association for Computational Linguistics,
+  2023.
+
+\bibitem[Thakur et~al.(2021)Thakur, Reimers, R\"{u}ckl\'{e}, Srivastava, and
+  Gurevych]{thakur2021beir}
+Nandan Thakur, Nils Reimers, Andreas R\"{u}ckl\'{e}, Abhishek Srivastava, and
+  Iryna Gurevych.
+\newblock {BEIR}: A heterogeneous benchmark for zero-shot evaluation of
+  information retrieval models.
+\newblock In \emph{Thirty-fifth Conference on Neural Information Processing
+  Systems Datasets and Benchmarks Track}, 2021.
+
+\bibitem[Trivedi et~al.(2023)Trivedi, Balasubramanian, Khot, and
+  Sabharwal]{trivedi2023interleaving}
+Harsh Trivedi, Niranjan Balasubramanian, Tushar Khot, and Ashish Sabharwal.
+\newblock Interleaving retrieval with chain-of-thought reasoning for
+  knowledge-intensive multi-step questions.
+\newblock In \emph{Proceedings of the 61st Annual Meeting of the Association
+  for Computational Linguistics (ACL)}, pages 10014--10037, Toronto, Canada,
+  2023. Association for Computational Linguistics.
+
+\bibitem[Wang et~al.(2024)Wang, Yang, Huang, Yang, Majumder, and
+  Wei]{wang2024text}
+Liang Wang, Nan Yang, Xiaolong Huang, Linjun Yang, Rangan Majumder, and Furu
+  Wei.
+\newblock Improving text embeddings with large language models.
+\newblock In \emph{Proceedings of the 62nd Annual Meeting of the Association
+  for Computational Linguistics (ACL)}, pages 11897--11916, Bangkok, Thailand,
+  2024. Association for Computational Linguistics.
+
+\bibitem[Yang et~al.(2018)Yang, Qi, Zhang, Bengio, Cohen, Salakhutdinov, and
+  Manning]{yang2018hotpotqa}
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William~W. Cohen, Ruslan
+  Salakhutdinov, and Christopher~D. Manning.
+\newblock {HotpotQA}: A dataset for diverse, explainable multi-hop question
+  answering.
+\newblock In \emph{Proceedings of the 2018 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 2369--2380, Brussels, Belgium,
+  2018. Association for Computational Linguistics.
+
+\bibitem[Zhu et~al.(2023)Zhu, Zhao, Liu, Gao, and Liu]{zhu2023cached}
+Lingjun Zhu, Zhuofei Zhao, Lianghao Liu, Yilun Gao, and Xinchen Liu.
+\newblock Cached model-as-a-resource: Provisioning large language model agents
+  for edge inference.
+\newblock In \emph{arXiv preprint arXiv:2403.05521}, 2023.
+
+\end{thebibliography}

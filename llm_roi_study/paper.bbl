@@ -1,0 +1,138 @@
+\begin{thebibliography}{18}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Acemoglu and Restrepo(2018)]{acemoglu2018}
+Daron Acemoglu and Pascual Restrepo.
+\newblock The race between man and machine: Implications of technology for
+  growth, factor shares, and employment.
+\newblock \emph{American Economic Review}, 108\penalty0 (6):\penalty0
+  1488--1542, 2018.
+\newblock \doi{10.1257/aer.20160696}.
+
+\bibitem[Amershi et~al.(2019)Amershi, Weld, Vorvoreanu, Fourney, Nushi,
+  Collisson, Suh, Iqbal, Bennett, Inkpen, et~al.]{amershi2019}
+Saleema Amershi, Dan Weld, Mihaela Vorvoreanu, Adam Fourney, Besmira Nushi,
+  Penny Collisson, Jina Suh, Shamsi Iqbal, Paul~N Bennett, Kori Inkpen, et~al.
+\newblock Software engineering for machine learning: A case study.
+\newblock In \emph{Proceedings of the 41st International Conference on Software
+  Engineering: Software Engineering in Practice}, 2019.
+\newblock \doi{10.1145/3290605.3300233}.
+
+\bibitem[Bansal et~al.(2019)Bansal, Nushi, Kamar, Weld, Lasecki, and
+  Horvitz]{bansal2019}
+Gagan Bansal, Besmira Nushi, Ece Kamar, Daniel~S Weld, Walter~S Lasecki, and
+  Eric Horvitz.
+\newblock Updates in human-{AI} teams: Understanding and addressing the
+  performance/compatibility tradeoff.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~33, pages 2429--2437, 2019.
+\newblock \doi{10.1609/aaai.v33i01.33012429}.
+
+\bibitem[Benjamini and Hochberg(1995)]{benjamini1995}
+Yoav Benjamini and Yosef Hochberg.
+\newblock Controlling the false discovery rate: A practical and powerful
+  approach to multiple testing.
+\newblock \emph{Journal of the Royal Statistical Society, Series B},
+  57\penalty0 (1):\penalty0 289--300, 1995.
+
+\bibitem[Brynjolfsson et~al.(2023)Brynjolfsson, Li, and
+  Raymond]{brynjolfsson2023}
+Erik Brynjolfsson, Danielle Li, and Lindsey~R Raymond.
+\newblock Generative {AI} at work.
+\newblock Working Paper 31161, National Bureau of Economic Research, 2023.
+
+\bibitem[Buccinca et~al.(2021)Buccinca, Malaya, and Gajos]{buccinca2021}
+Zana Buccinca, Maja~B Malaya, and Krzysztof~Z Gajos.
+\newblock To trust or to think: Cognitive forcing functions can reduce
+  overreliance on {AI} in {AI}-assisted decision making.
+\newblock In \emph{Proceedings of the ACM on Human-Computer Interaction},
+  volume~5, 2021.
+
+\bibitem[Dell'Acqua et~al.(2023)Dell'Acqua, McFowland, Mollick, Lifshitz-Assaf,
+  Kellogg, Rajendran, Krayer, Candelon, and Lakhani]{dellacqua2023}
+Fabrizio Dell'Acqua, Edward McFowland, Ethan~R Mollick, Hila Lifshitz-Assaf,
+  Katherine Kellogg, Saran Rajendran, Lisa Krayer, Francois Candelon, and
+  Karim~R Lakhani.
+\newblock Navigating the jagged technological frontier: Field experimental
+  evidence of the effects of {AI} on knowledge worker productivity and quality.
+\newblock \penalty0 (24-013), 2023.
+
+\bibitem[Es et~al.(2023)Es, James, Anke, and Schockaert]{es2023}
+Shahul Es, Jithin James, Luis~Espinosa Anke, and Steven Schockaert.
+\newblock {RAGAS}: Automated evaluation of retrieval augmented generation.
+\newblock \emph{arXiv preprint arXiv:2309.15217}, 2023.
+
+\bibitem[Hart(2006)]{hart2006}
+Sandra~G Hart.
+\newblock {NASA-TLX}: 20 years later.
+\newblock \emph{Proceedings of the Human Factors and Ergonomics Society Annual
+  Meeting}, 50\penalty0 (9):\penalty0 904--908, 2006.
+
+\bibitem[Hart and Staveland(1988)]{hart1988}
+Sandra~G Hart and Lowell~E Staveland.
+\newblock Development of {NASA-TLX} ({Task Load Index}): Results of empirical
+  and theoretical research.
+\newblock In \emph{Human Mental Workload}, pages 139--183. North Holland,
+  Amsterdam, 1988.
+
+\bibitem[Lewis et~al.(2020)Lewis, Perez, Piktus, Petroni, Karpukhin, Goyal,
+  K{\"u}ttler, Lewis, Yih, Rockt{\"a}schel, et~al.]{lewis2020}
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
+  Karpukhin, Naman Goyal, Heinrich K{\"u}ttler, Mike Lewis, Wen-tau Yih, Tim
+  Rockt{\"a}schel, et~al.
+\newblock Retrieval-augmented generation for knowledge-intensive {NLP} tasks.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~33, pages 9459--9474, 2020.
+
+\bibitem[Noy and Zhang(2023)]{noy2023}
+Shakked Noy and Whitney Zhang.
+\newblock Experimental evidence on the productivity effects of generative
+  artificial intelligence.
+\newblock \emph{Science}, 381\penalty0 (6654):\penalty0 187--192, 2023.
+\newblock \doi{10.1126/science.adh2586}.
+
+\bibitem[Paas et~al.(2003)Paas, Renkl, and Sweller]{paas2003}
+Fred Paas, Alexander Renkl, and John Sweller.
+\newblock Cognitive load theory and instructional design: Recent developments.
+\newblock \emph{Educational Psychologist}, 38\penalty0 (1):\penalty0 1--4,
+  2003.
+
+\bibitem[Peng et~al.(2023)Peng, Kalliamvakou, Canny, and Tiwari]{peng2023}
+Sida Peng, Eirini Kalliamvakou, Peter Canny, and Madan Tiwari.
+\newblock The impact of {AI} on developer productivity: Evidence from {GitHub
+  Copilot}.
+\newblock \emph{arXiv preprint arXiv:2302.06590}, 2023.
+
+\bibitem[Schemmer et~al.(2023)Schemmer, Hemmer, K{\"u}hl, Benz, and
+  Satzger]{schemmer2023}
+Max Schemmer, Patrick Hemmer, Niklas K{\"u}hl, Carina Benz, and Gerhard
+  Satzger.
+\newblock Appropriate reliance on {AI} advice: Conceptualization and the effect
+  of explanations.
+\newblock In \emph{Proceedings of the 28th International Conference on
+  Intelligent User Interfaces}, 2023.
+
+\bibitem[Shuster et~al.(2021)Shuster, Poff, Chen, Kiela, and
+  Weston]{shuster2021}
+Kurt Shuster, Spencer Poff, Moya Chen, Douwe Kiela, and Jason Weston.
+\newblock Retrieval augmentation reduces hallucination in conversation.
+\newblock In \emph{Findings of EMNLP}, 2021.
+
+\bibitem[Sweller(1988)]{sweller1988}
+John Sweller.
+\newblock Cognitive load during problem solving: Effects on learning.
+\newblock \emph{Cognitive Science}, 12\penalty0 (2):\penalty0 257--285, 1988.
+
+\bibitem[Vasconcelos et~al.(2023)Vasconcelos, Jain, Garg, Tonne, Bansal, and
+  Amershi]{vasconcelos2023}
+Helena Vasconcelos, Matthew Jain, Shivam Garg, Tobias Tonne, Gagan Bansal, and
+  Saleema Amershi.
+\newblock Explanations can reduce overreliance on {AI} systems during
+  decision-making.
+\newblock volume~7, 2023.
+
+\end{thebibliography}

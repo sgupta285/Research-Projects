@@ -1,0 +1,4 @@
+name: hotpotqa
+root_dir: data/hotpotqa
+split: dev_distractor
+max_examples: 500

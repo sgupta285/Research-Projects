@@ -1,0 +1,11 @@
+pricing_table_version: "2024-11-20"
+models:
+  gpt-4o-2024-11-20:
+    input_per_1k_tokens: 0.0025
+    output_per_1k_tokens: 0.010
+    currency: USD
+  text-embedding-3-small:
+    input_per_1k_tokens: 0.00002
+    currency: USD
+retrieval:
+  faiss_query_cost_usd: 0.000001

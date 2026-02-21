@@ -1,0 +1,9 @@
+dataset: configs/datasets/hotpotqa_dev_distractor.yaml
+pricing: configs/pricing/default.yaml
+pipeline:
+  chunking: {mode: words, chunk_size: 200, overlap: 40}
+  retrieval: {type: bm25, top_k: 8}
+  rerank: {enabled: false, type: simple}
+  caching: {embedding_cache: true, retrieval_cache: true, response_cache: false}
+  seed: 7
+outputs: {out_dir: outputs}

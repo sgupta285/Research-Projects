@@ -1,0 +1,11 @@
+model: "gpt-4o-2024-11-20"
+temperature: 0.2
+max_tokens: 1500
+top_p: 1.0
+system_prompt: |
+  You are a helpful assistant for knowledge work tasks.
+  Respond factually and concisely. Do not fabricate citations or statistics.
+  You do not have access to external documents or the internet.
+  If uncertain, say so explicitly.
+request_timeout_s: 60
+max_retries: 3

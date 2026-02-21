@@ -1,0 +1,9 @@
+dataset: configs/datasets/legalbenchrag.yaml
+pricing: configs/pricing/default.yaml
+pipeline:
+  chunking: {mode: chars, chunk_size: 1200, overlap: 200}
+  retrieval: {type: hybrid, top_k: 10}
+  rerank: {enabled: true, type: simple}
+  caching: {embedding_cache: true, retrieval_cache: true, response_cache: false}
+  seed: 7
+outputs: {out_dir: outputs}

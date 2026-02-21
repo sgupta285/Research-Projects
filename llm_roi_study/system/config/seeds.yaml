@@ -1,0 +1,4 @@
+# COMMIT TO OSF BEFORE DATA COLLECTION. Do NOT change after committing.
+randomization_seed: 42
+latin_square_seed: 1337
+task_assignment_seed: 2025

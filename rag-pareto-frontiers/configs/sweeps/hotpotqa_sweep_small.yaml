@@ -1,0 +1,9 @@
+dataset: configs/datasets/hotpotqa_dev_distractor.yaml
+pricing: configs/pricing/default.yaml
+outputs: {out_dir: outputs}
+grid:
+  retrieval.type: [bm25, dense, hybrid]
+  retrieval.top_k: [5, 8, 12]
+  chunking.chunk_size: [150, 250]
+  chunking.overlap: [30]
+  rerank.enabled: [false, true]

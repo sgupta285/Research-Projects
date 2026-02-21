@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    volumes:
+      - ./data:/app/data
+      - ./system/config:/app/system/config
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PARTICIPANT_ID_SALT=${PARTICIPANT_ID_SALT}
+    restart: unless-stopped

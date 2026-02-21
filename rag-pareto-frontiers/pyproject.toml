@@ -1,0 +1,9 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-pareto-frontiers"
+version = "0.3.0"
+description = "Latency–Cost–Quality Pareto Frontiers for RAG"
+requires-python = ">=3.9"

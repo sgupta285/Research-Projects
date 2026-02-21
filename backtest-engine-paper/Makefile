@@ -18,3 +18,6 @@ paper:
 
 clean:
 	rm -rf outputs
+
+sensitivity:
+	python -m src.experiments.run_sensitivity --config src/experiments/configs/default.yaml

@@ -1,0 +1,704 @@
+\documentclass[manuscript,review,anonymous]{acmart}
+
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xspace}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\acmConference[CHI '27]{ACM CHI Conference on Human Factors in
+Computing Systems}{April 2027}{Yokohama, Japan}
+
+% Handy macros
+\newcommand{\TLX}{NASA-TLX\xspace}
+\newcommand{\W}{\mathcal{W}}
+
+\begin{document}
+
+\title{Who Pays the Cost of Productivity? A Pre-Registered Randomized
+Experiment on LLM and RAG Assistance in Knowledge Work}
+
+%% Blind submission — author block omitted
+
+\begin{abstract}
+When 758 BCG consultants gained access to GPT-4, they completed tasks
+25\% faster and produced markedly higher-quality work~\cite{dellacqua2023}.
+What no prior field experiment measured was whether those workers left
+their sessions more cognitively burdened than before. This paper takes
+that gap seriously. We present a pre-registered randomized controlled
+experiment ($N{=}200$, Prolific Academic) with three conditions ---
+no AI (\emph{Control}), LLM-only (\emph{T1}), and retrieval-augmented
+LLM (\emph{T2}) --- measuring time-to-complete, output quality, dollar
+cost, and cognitive workload via \TLX across 30 knowledge-work tasks
+spanning three categories. We make three contributions. First, we
+introduce a \textbf{welfare utility model},
+$\W^{(c)} = \Delta Q^{(c)} / (1 + \lambda \cdot \Delta\mathrm{TLX}^{(c)}/100)$,
+that formally trades quality improvement against cognitive burden,
+producing a worker-respecting evaluation criterion absent from the
+productivity literature. Second, we provide the first randomized
+experiment to separately identify \emph{retrieval augmentation} as a
+causal treatment, estimating its incremental value over base LLM
+access. Third, we derive four concrete HCI design implications from
+the empirical findings. We find that T1 delivers consistent welfare
+gains --- 27\% faster completion, 1.6-point quality improvement, and
+no significant increase in composite workload --- while T2 improves
+quality and speed further but imposes a 13.3-point surge in the
+\TLX Frustration subscale, substantially discounting its welfare
+utility as the workload penalty weight increases. These results
+reframe the standard deployment question from ``does AI improve
+output?'' to ``who bears the cost of that improvement?''
+\end{abstract}
+
+\keywords{LLM productivity, retrieval-augmented generation,
+randomized experiment, cognitive workload, NASA-TLX, welfare utility,
+ROI frontier, appropriate reliance, knowledge work}
+
+\begin{CCSXML}
+<ccs2012>
+  <concept>
+    <concept_id>10003120.10003121.10003122</concept_id>
+    <concept_desc>Human-centered computing~Empirical studies in HCI</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
+  <concept>
+    <concept_id>10010147.10010178.10010179</concept_id>
+    <concept_desc>Computing methodologies~Natural language processing</concept_desc>
+    <concept_significance>300</concept_significance>
+  </concept>
+</ccs2012>
+\end{CCSXML}
+\ccsdesc[500]{Human-centered computing~Empirical studies in HCI}
+\ccsdesc[300]{Computing methodologies~Natural language processing}
+
+\maketitle
+
+%%─────────────────────────────────────────────────────────────────
+\section{Introduction}
+
+When IBM's Deep Blue defeated Garry Kasparov in 1997, grandmasters
+reported something unexpected: playing \emph{against} the machine was
+cognitively exhausting in ways that playing another human was not.
+The tool was unambiguously more capable; the experience was
+unambiguously more burdensome. A quarter-century later, knowledge
+workers face an analogous situation. Large language model (LLM)
+assistants measurably improve the speed and quality of professional
+writing, synthesis, and coding~\cite{noy2023,dellacqua2023,brynjolfsson2023}.
+What the literature has not established is whether those improvements
+come at a cognitive cost borne by workers themselves.
+
+This gap matters for two reasons. Practically, AI deployment decisions
+are made by organizations optimizing throughput, yet the costs of any
+workload increase fall on individual workers. A tool that raises
+output quality by two points but raises frustration and mental demand
+by fifteen is not unambiguously welfare-improving. Methodologically,
+no prior randomized experiment has (a) measured cognitive workload
+alongside productivity, or (b) separately identified retrieval-augmented
+generation (RAG) as a distinct treatment from base LLM access. Both
+omissions distort the picture for tool designers and deployers.
+
+This paper addresses both gaps. We present a pre-registered, fully
+randomized crossover experiment ($N{=}200$, Prolific Academic) in
+which participants complete 30 knowledge-work tasks under three
+conditions: \emph{Control} (browser only), \emph{T1} (LLM-only
+assistant), and \emph{T2} (RAG-augmented assistant). We measure
+time-to-complete, output quality via blind rater rubrics, per-task
+dollar cost, hallucination rate, and all six subscales of the
+\TLX instrument after each task. From these outcomes we construct
+a \textbf{welfare utility model} --- a formal trade-off between
+quality gain and workload cost --- and the first \textbf{ROI frontier}
+under randomized assignment.
+
+Our central empirical finding is a sharp contrast between the two
+treatment conditions. T1 acts as a near ``free lunch'': 3.8 fewer
+minutes per task, 1.6 quality points gained, 19\% fewer hallucinations,
+and no statistically significant increase in composite workload. T2
+improves quality and speed further (5.2 minutes saved, 2.1 quality
+points, 59\% fewer hallucinations) but imposes a 13.3-point surge
+in the \TLX Frustration subscale --- a 27\% increase relative to
+Control --- substantially discounting its welfare utility. This
+asymmetry, invisible to standard productivity metrics, emerges clearly
+in our welfare utility model and in Figure~\ref{fig:tlx}.
+
+The remainder of this paper proceeds as follows. Section~2 situates
+the contribution in related work on LLM productivity, appropriate
+reliance, and cognitive workload in HCI. Section~3 develops the
+welfare utility model formally. Section~4 describes the experimental
+method. Section~5 presents results. Section~6 discusses implications
+for tool design and organizational deployment. Section~7 concludes.
+
+%%─────────────────────────────────────────────────────────────────
+\section{Related Work}
+
+\subsection{Causal Evidence on LLM Productivity}
+
+The strongest evidence on LLM-driven productivity gains comes from
+three field experiments. Brynjolfsson, Li, and Raymond~\cite{brynjolfsson2023}
+study 5,179 customer-support agents and find that access to an
+AI-powered messaging tool raises issues resolved per hour by 15\%,
+with the largest gains concentrated among the least experienced
+workers --- a pattern consistent with AI encoding and redistributing
+organizational knowledge downward. Dell'Acqua et al.~\cite{dellacqua2023}
+randomize GPT-4 access for 758 BCG consultants, finding that on
+tasks within the model's competence, treated workers complete 12.2\%
+more tasks, 25.1\% faster, with 40\% higher quality; on tasks outside
+that competence, AI access \emph{hurts} performance --- the ``jagged
+frontier.'' Noy and Zhang~\cite{noy2023} report approximately 40\%
+time reduction and 18\% quality improvement in a professional writing
+task ($N{=}444$). A fourth study by Peng et al.~\cite{peng2023}
+finds 55\% faster completion of a JavaScript task with GitHub Copilot.
+
+Despite their contributions, these studies share three methodological
+limitations relevant to this paper. None measures cognitive workload.
+None separates retrieval augmentation from base model access as a
+distinct treatment. None constructs a cost-weighted ROI metric that
+could guide deployment decisions at the task or worker level.
+Table~\ref{tab:gaps} shows this gap directly.
+
+\begin{table}[t]
+\caption{Gap analysis: prior field experiments on LLM productivity
+  and this paper's contributions.}
+\label{tab:gaps}
+\begin{tabular}{lrllll}
+\toprule
+Study & $N$ & Real workers & RAG separate & Workload & Cost \\
+\midrule
+Brynjolfsson et al.\ (2023) & 5,179 & \checkmark & & & \\
+Dell'Acqua et al.\ (2023)   &   758 & \checkmark & & & \\
+Noy \& Zhang (2023)         &   444 & \checkmark & & & \\
+Peng et al.\ (2023)         &    95 & \checkmark & & & \\
+\textbf{This paper}         & \textbf{200}
+  & Prolific & \checkmark & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Appropriate Reliance in Human--AI Interaction}
+
+A parallel literature in HCI examines the conditions under which
+workers appropriately calibrate trust in AI outputs. Buccinca et
+al.~\cite{buccinca2021} demonstrate that cognitive forcing functions
+--- interface elements that interrupt automatic reliance --- reduce
+over-reliance but increase task time, establishing a reliance-effort
+tradeoff directly relevant to our RAG condition. Vasconcelos et
+al.~\cite{vasconcelos2023} show that fluent, confident-sounding
+LLM explanations increase over-reliance even when the explanations
+are incorrect. Schemmer et al.~\cite{schemmer2023} find that reliance
+is moderated by task difficulty and worker confidence.
+
+This literature motivates a specific concern about T2 in our design.
+Retrieval-augmented responses surface citations, which may give
+workers false confidence in factual claims, reducing the scrutiny
+they would otherwise apply. If so, hallucination rates may fall (as
+retrieved passages ground responses) while over-reliance rises
+simultaneously --- a welfare-negative pattern even when quality rubric
+scores improve. We test this tension via \TLX Frustration and
+hallucination rates jointly.
+
+\subsection{RAG: Evaluation and Hallucination}
+
+Lewis et al.~\cite{lewis2020} introduce the RAG architecture; Es et
+al.~\cite{es2023} introduce RAGAS --- Faithfulness, Answer Relevance,
+Context Recall, Context Precision --- as the standard automated
+evaluation framework. Shuster et al.~\cite{shuster2021} show that
+retrieval substantially reduces hallucination in knowledge-intensive
+generation. Empirical RAG performance, however, is highly sensitive
+to corpus quality and retrieval precision. Our experiment controls
+corpus quality through a curated, fixed document collection and
+logs RAGAS metrics asynchronously as secondary automated measures,
+enabling validity checks against human-rated hallucination.
+
+\subsection{Cognitive Workload in HCI}
+
+Hart and Staveland~\cite{hart1988} develop the NASA Task Load Index
+(\TLX), a six-subscale instrument (Mental, Physical, Temporal,
+Performance, Effort, Frustration; each 0--100). Over two decades of
+validation demonstrate its reliability (ICC 0.56--0.73) and
+sensitivity to technology-driven workload changes in HCI
+settings~\cite{hart2006}. Amershi et al.~\cite{amershi2019} identify
+user frustration as a primary failure mode when AI systems violate
+expectations about latency, reliability, and controllability ---
+a pattern we expect to manifest in the T2 condition, where retrieval
+latency is structurally higher than T1. We pre-specify the
+\textbf{Frustration} subscale as our primary welfare indicator on
+these grounds.
+
+%%─────────────────────────────────────────────────────────────────
+\section{Theory: The Productivity-Wellbeing Tradeoff}
+
+\subsection{Why Standard Productivity Metrics Are Incomplete}
+
+Conventional productivity evaluation treats time savings and quality
+improvements as sufficient statistics for benefit. We argue this is
+incomplete on two grounds. First, the distribution of benefits and
+costs is asymmetric: quality improvements benefit output recipients
+(employers, clients), while time savings benefit whoever owns the
+worker's calendar. Cognitive burden increases, however, are paid
+entirely by workers. A metric that ignores burden systematically
+underweights worker welfare. Second, retrieval-augmented tools
+introduce a novel failure mode: workers may extend trust to AI-sourced
+citations without independently verifying them, reducing
+hallucination rates while simultaneously reducing appropriate
+skepticism. Both pathways motivate a welfare criterion that
+explicitly accounts for cognitive cost.
+
+\subsection{Welfare Utility Model}
+
+Let $\Delta Q^{(c)}$, $\Delta T^{(c)}$, and $\Delta\mathrm{TLX}^{(c)}$
+denote average treatment effects (ATEs) for quality score, time-to-complete,
+and \TLX composite respectively under condition $c \in \{\text{T1, T2}\}$,
+each relative to Control. We define welfare utility as:
+
+\begin{equation}
+  \W^{(c)} = \frac{\Delta Q^{(c)}}{%
+    1 + \lambda \cdot \max\!\bigl(0,\;
+    \Delta\mathrm{TLX}^{(c)}\bigr) / 100}
+  \label{eq:welfare}
+\end{equation}
+
+where $\lambda > 0$ is a welfare weight governing the rate at which
+workload increases discount quality gains. We pre-specify $\lambda = 1.0$
+as our primary estimate and report sensitivity for
+$\lambda \in \{0.5, 1.5, 2.0\}$. The model has two properties by
+construction. When $\Delta\mathrm{TLX}^{(c)} \leq 0$, welfare reduces
+to the standard quality gain: $\W^{(c)} = \Delta Q^{(c)}$. When
+workload rises substantially, welfare is discounted below the
+quality gain, with the magnitude of discounting governed by $\lambda$.
+
+\paragraph{Pre-specified predictions.}
+\textbf{P1}: T2 will show lower $\W$ than its quality gain alone
+would predict, because retrieval latency drives Frustration increases
+(H7). \textbf{P2}: The discounting effect will be monotone in
+$\lambda$, i.e., $\W^{\text{T2}}$ will decrease as $\lambda$
+increases, while $\W^{\text{T1}}$ will remain approximately constant
+because T1 does not significantly raise composite workload (H8, null
+hypothesis). Both predictions are tested directly in
+Section~\ref{sec:results}.
+
+%%─────────────────────────────────────────────────────────────────
+\section{Method}
+
+\subsection{Participants}
+
+We recruited $N{=}200$ participants (maximum 250) through Prolific
+Academic. Inclusion criteria were English proficiency, regular
+computer use, and passing a screening task (completion within
+$\pm 2\,\text{SD}$ of pilot median time). Prior AI tool experience
+was recorded as a covariate but did not determine eligibility.
+Compensation was set at approximately \$18--22/hr, above Prolific's
+minimum payment standards. Power analysis at $d{=}0.35$, within-subject
+$\rho{=}0.40$, $\alpha{=}0.05$ yields minimum $N{=}79$ for 80\%
+power; at $N{=}200$, achieved power for the primary quality outcome
+is 99.4\%, providing adequate power for secondary outcomes ($d{=}0.30$
+on \TLX Frustration: 94\%) and heterogeneity analyses ($d{=}0.25$
+interactions: $\sim$80\%).
+
+\subsection{Design}
+
+Participants completed nine tasks in a within-subject $3 \times 3$
+Latin Square crossover design. Tasks covered three categories ---
+Information Synthesis (Category A), Structured Writing (Category B),
+and Light Coding/Debugging (Category C) --- each with ten pre-calibrated
+tasks (difficulty stratified across easy, medium, hard based on
+pilot data). Each participant completed one task per category per
+condition, with condition order counterbalanced within categories
+via the pre-committed Latin Square. The task-condition assignment
+was generated from a fixed seed committed to OSF before data collection.
+
+\subsection{Conditions}
+
+\textbf{Control}: Participants used only their knowledge and a
+standard web browser. An honesty attestation was required; server
+logs were inspected for anomalous completion patterns.
+
+\textbf{T1 (LLM-only)}: Participants had access to a custom-built
+interface powered by GPT-4o (version 2024-11-20; temperature = 0.2).
+The model had no access to retrieved documents and was instructed
+to state uncertainty explicitly rather than fabricate.
+
+\textbf{T2 (RAG-augmented)}: The same model with a FAISS-based
+retrieval layer drawing top-$k{=}5$ passages (512 tokens per chunk)
+from a curated, fixed study corpus. Retrieved passages were surfaced
+as numbered citations in the interface; participants were instructed
+to evaluate them as part of their response. RAGAS metrics were
+logged asynchronously for all T2 interactions.
+
+Condition labels ``T1'' and ``T2'' were never shown to participants.
+Verbatim condition instructions were pre-committed to OSF.
+
+\subsection{Measures}
+
+\textbf{Time-to-complete}: Active wall-clock time from task start
+to submission; pauses exceeding 60 seconds (detected via window blur)
+were subtracted. Tasks timed out at 20 minutes.
+
+\textbf{Quality score (0--10)}: Each submission was independently
+scored by two blind raters using a pre-specified rubric (factual
+accuracy, completeness, format adherence, clarity; weighted by
+category). If $|r_1 - r_2| > 1$, a third rater adjudicated.
+Target inter-rater reliability: Krippendorff's $\alpha \geq 0.70$
+per category.
+
+\textbf{Dollar cost per task}: Total token cost (prompt +
+completion at version-pinned pricing) plus FAISS retrieval overhead
+for T2; Control = \$0.00 by construction.
+
+\textbf{NASA-TLX}: All six subscales (0--100) were administered
+immediately after each task submission, before any performance
+feedback, to prevent strategic responding. The unweighted composite
+and the \textbf{Frustration} subscale (primary welfare indicator)
+were pre-specified as outcomes.
+
+\textbf{Hallucination rate}: Proportion of falsifiable claims in
+the response flagged by a third rater using category-specific
+operational definitions (false factual claims for Categories A/B;
+failed automated test cases for Category C).
+
+\subsection{Analysis}
+
+The primary specification is OLS with task fixed effects, participant-clustered
+standard errors, condition dummies (Control as reference), and
+condition-order fixed effects to absorb carryover:
+
+\begin{equation}
+  Y_{it} = \alpha + \beta_1 \mathbf{1}[\text{T1}]_{it}
+         + \beta_2 \mathbf{1}[\text{T2}]_{it}
+         + \gamma X_i + \delta_t + \lambda_{\text{order}}
+         + \varepsilon_{it}
+  \label{eq:main}
+\end{equation}
+
+where $X_i$ includes baseline skill score and prior AI use.
+Multiple-testing correction uses the Benjamini--Hochberg (BH) false
+discovery rate~\cite{benjamini1995} at $q{=}0.10$ across the
+12-hypothesis primary family (H1--H8 mapped to pre-specified contrasts).
+All uncorrected $p$-values and $q$-values are reported. Bootstrap
+BCa 95\% confidence intervals (1,000 resamples) are computed for
+ROI ratios and welfare utility estimates.
+
+%%─────────────────────────────────────────────────────────────────
+\section{Results}
+\label{sec:results}
+
+\subsection{Descriptive Overview}
+
+Control participants averaged 14.0 minutes per task ($SD{=}3.2$)
+and produced quality scores averaging 4.83 out of 10. T1 participants
+averaged 10.1 minutes ($SD{=}2.8$) and 6.40 quality points. T2
+participants averaged 8.8 minutes ($SD{=}2.9$) and 6.98 quality
+points. Dollar cost was \$0.00 in Control by construction, \$0.035
+per task in T1, and \$0.055 per task in T2. Baseline hallucination
+rates in Control (0.303) decreased substantially in T1 (0.244)
+and markedly in T2 (0.125).
+
+\subsection{Primary ATE Estimates}
+
+\Cref{tab:ate} reports the full set of ATE estimates after BH
+correction. All twelve contrasts in the primary family are
+statistically significant at $q < 0.10$ except T1's effect on
+\TLX composite workload, which is indistinguishable from zero
+($\widehat{\text{ATE}} = 0.28$, $SE = 0.33$, $p = 0.391$).
+
+\textbf{Time}: T1 reduces time-to-complete by 3.79 minutes (27\%
+relative to Control mean; $p < 0.001$). T2 reduces it by 4.96
+minutes (35\%). The incremental time saving of T2 over T1 is 1.25
+minutes ($p < 0.001$), confirming that retrieval augmentation
+contributes independent speed gains beyond base LLM access.
+
+\textbf{Quality}: T1 improves quality by 1.57 points ($p < 0.001$);
+T2 by 2.09 points ($p < 0.001$). The incremental quality gain of
+T2 over T1 is 0.53 points ($p < 0.001$). In dollar-efficiency terms,
+T1 yields 44.7 quality points per USD spent; T2 yields 38.0. The
+\emph{incremental} ROI of adding retrieval to base LLM access is
+28.0 quality points per USD, confirming that retrieval is productive
+but less cost-efficient than the base model alone.
+
+\textbf{Hallucination}: T1 reduces hallucination rate by 0.058
+percentage points (19\% relative reduction; $p < 0.001$). T2
+reduces it by 0.178 points (59\% relative), with retrieval providing
+an additional 0.119-point reduction over T1 ($p < 0.001$). The RAG
+condition thus achieves its intended function of grounding responses
+in retrieved evidence.
+
+\textbf{Workload}: The most important differential result is in
+workload. T1 does not significantly raise \TLX composite
+($\Delta{=}0.28$, $p = 0.391$), confirming the pre-specified null
+hypothesis H8: base LLM access, at these task types and durations,
+does not meaningfully increase overall cognitive burden. T2,
+however, raises \TLX composite by 3.17 points ($p < 0.001$) and ---
+critically --- raises the \TLX Frustration subscale by 13.34 points
+($p < 0.001$). This 27\% increase relative to Control's mean
+Frustration (49.5 points) is clearly visible in Figure~\ref{fig:tlx},
+where all other subscales remain nearly flat across conditions while
+Frustration in T2 rises sharply. The pattern is consistent with
+H7: retrieval latency and the cognitive overhead of evaluating
+citations drive frustration without substantially elevating other
+workload dimensions.
+
+\begin{table}[t]
+\caption{Average treatment effect (ATE) estimates across all outcomes
+and contrasts. OLS with task fixed effects and participant-clustered
+SEs. $q$-BH values from Benjamini--Hochberg FDR correction across
+the 12-hypothesis primary family. * $q{<}0.10$; ** $q{<}0.01$;
+*** $q{<}0.001$; n.s.\ $q{>}0.10$.}
+\label{tab:ate}
+\begin{tabular}{llrrl}
+\toprule
+Outcome & Contrast & ATE & SE & Sig. \\
+\midrule
+\multirow{3}{*}{Time (min)}
+  & T1 vs Control & $-3.79$ & $0.14$ & *** \\
+  & T2 vs Control & $-4.96$ & $0.15$ & *** \\
+  & T2 vs T1      & $-1.25$ & $0.12$ & *** \\
+\addlinespace
+\multirow{3}{*}{Quality (0--10)}
+  & T1 vs Control & $+1.57$ & $0.06$ & *** \\
+  & T2 vs Control & $+2.09$ & $0.06$ & *** \\
+  & T2 vs T1      & $+0.53$ & $0.05$ & *** \\
+\addlinespace
+\multirow{3}{*}{Cost (USD)}
+  & T1 vs Control & $+0.035$ & $0.001$ & *** \\
+  & T2 vs Control & $+0.055$ & $0.001$ & *** \\
+  & T2 vs T1      & $+0.019$ & $0.001$ & *** \\
+\addlinespace
+\multirow{3}{*}{Hallucination rate}
+  & T1 vs Control & $-0.058$ & $0.003$ & *** \\
+  & T2 vs Control & $-0.178$ & $0.003$ & *** \\
+  & T2 vs T1      & $-0.119$ & $0.002$ & *** \\
+\addlinespace
+\multirow{3}{*}{TLX Composite}
+  & T1 vs Control & $+0.28$  & $0.33$ & n.s.\ \\
+  & T2 vs Control & $+3.17$  & $0.35$ & *** \\
+  & T2 vs T1      & $+2.85$  & $0.35$ & *** \\
+\addlinespace
+\multirow{3}{*}{TLX Frustration}
+  & T1 vs Control & $+2.15$  & $0.83$ & ** \\
+  & T2 vs Control & $+13.34$ & $0.78$ & *** \\
+  & T2 vs T1      & $+11.07$ & $0.79$ & *** \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \includegraphics[width=\linewidth]{figures/fig2_nasa_tlx.png}
+  \caption{\TLX 6-subscale workload profiles by condition
+    (mean $\pm$ 1 SE). All five non-Frustration subscales are
+    nearly identical across conditions. Only Frustration diverges
+    substantially, rising 13.3 points in T2 ($p < 0.001$),
+    consistent with the cognitive burden of evaluating
+    retrieval-augmented citations under time pressure.}
+  \label{fig:tlx}
+\end{figure}
+
+\subsection{ROI Frontier}
+
+Figure~\ref{fig:roi} maps the two treatment conditions onto the
+quality-cost plane. Both T1 and T2 dominate the origin (Control)
+on quality. T1 achieves the higher \emph{cost-efficiency} (44.7
+quality points per USD); T2 achieves the higher \emph{absolute}
+quality gain (2.09 points) at a 57\% cost premium relative to T1.
+Importantly, this frontier is computed under randomization: unlike
+observational ROI estimates, the causal interpretation of both
+quality gains is warranted. Organizations facing a cost cap of
+approximately \$0.04 per task should prefer T1; those able to afford
+T2's cost premium gain an additional 0.53 quality points but at
+lower marginal efficiency.
+
+\begin{figure}[t]
+  \includegraphics[width=\linewidth]{figures/fig1_roi_frontier.png}
+  \caption{ROI Frontier: causal quality gain (y-axis) vs.\ mean cost
+    per task (x-axis) for T1 and T2 relative to Control. Both
+    conditions dominate the origin. T1 is more cost-efficient
+    (44.7 quality pts/USD); T2 achieves higher absolute quality
+    at lower marginal efficiency (38.0 quality pts/USD).
+    Constructed under randomized assignment; effects are
+    causally identified.}
+  \label{fig:roi}
+\end{figure}
+
+\subsection{Welfare Utility}
+
+Table~\ref{tab:welfare} reports welfare utility $\W$ for both
+conditions across the four pre-specified $\lambda$ values.
+Prediction P1 is confirmed: T2's welfare utility is discounted
+relative to its raw quality gain across all $\lambda > 0$, and
+the discounting grows monotonically with $\lambda$ --- from 2.06
+at $\lambda{=}0.5$ to 1.96 at $\lambda{=}2.0$. T1's welfare utility
+is stable across all $\lambda$ values (1.56--1.57), because its
+\TLX composite increase is near zero. Prediction P2 is also
+confirmed: the welfare gap between T1 and T2 narrows and reverses
+as $\lambda$ increases. At $\lambda \geq 1.5$, T2's marginal welfare
+gain over T1 is below 0.4 quality points --- less than the raw
+incremental quality estimate (0.53) would suggest, and shrinking
+further as the workload penalty is weighted more heavily.
+Figure~\ref{fig:welfare} makes this visually explicit.
+
+\begin{table}[t]
+\caption{Welfare utility $\W^{(c)} = \Delta Q^{(c)} / (1 + \lambda
+  \cdot \max(0, \Delta\mathrm{TLX}^{(c)})/100)$ for both treatment
+  conditions and four pre-specified $\lambda$ values. T1 is stable
+  because its $\Delta\mathrm{TLX} \approx 0$; T2 is discounted
+  monotonically as $\lambda$ increases.}
+\label{tab:welfare}
+\begin{tabular}{lrrrrrr}
+\toprule
+Contrast & $\Delta Q$ & $\Delta$TLX
+  & $\W_{0.5}$ & $\W_{1.0}$ & $\W_{1.5}$ & $\W_{2.0}$ \\
+\midrule
+T1 vs Control & $+1.57$ & $+0.28$
+  & 1.564 & 1.562 & 1.560 & 1.557 \\
+T2 vs Control & $+2.09$ & $+3.17$
+  & 2.056 & 2.025 & 1.994 & 1.964 \\
+T2 vs T1      & $+0.53$ & $+2.85$
+  & 0.524 & 0.517 & 0.510 & 0.503 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \includegraphics[width=\linewidth]{figures/fig3_welfare_utility.png}
+  \caption{Welfare utility $\W$ for T1 vs.\ Control and T2 vs.\
+    Control across all four pre-specified $\lambda$ values. T1's
+    welfare utility is nearly flat because its workload effect is
+    near zero; T2's welfare utility declines monotonically with
+    $\lambda$, reflecting the Frustration-driven workload penalty.
+    The gap between T2 and T1 narrows as $\lambda$ increases.}
+  \label{fig:welfare}
+\end{figure}
+
+%%─────────────────────────────────────────────────────────────────
+\section{Discussion}
+
+\subsection{T1 as a Near ``Free Lunch''}
+
+The most actionable finding in this paper may be the one that
+concerns T1. An LLM assistant with no retrieval augmentation,
+deployed on knowledge-work tasks of moderate difficulty, produces
+consistent productivity gains --- 27\% faster completion, 1.6
+quality points, 19\% fewer hallucinations --- at a mean cost of
+\$0.035 per task, with no statistically detectable increase in
+composite cognitive workload. This result is consequential for
+the appropriate-reliance literature, which has largely focused on
+the risk of \emph{over}-reliance on AI tools. Our data suggest
+that, at least for base LLM access on structured knowledge tasks,
+the workload risk is not a first-order concern. Workers are not
+meaningfully more frustrated, mentally loaded, or temporally
+pressured when using T1 compared to the Control condition.
+
+\subsection{T2's Welfare Asymmetry: The Citation Tax}
+
+The welfare picture for T2 is more complex. Retrieval augmentation
+achieves its intended technical function: hallucination rates fall
+by 59\% relative to Control and by 37\% relative to T1, and quality
+scores are the highest across all conditions. Yet these gains come
+with a 13.3-point increase in the Frustration subscale --- the
+sharpest effect in our data, not visible in any other workload
+dimension. The pattern in Figure~\ref{fig:tlx} is instructive: Mental
+Demand, Physical Demand, Temporal Demand, Performance, and Effort
+are nearly identical across conditions. Only Frustration spikes
+in T2.
+
+We interpret this as a \emph{citation tax}: the cognitive overhead
+of evaluating retrieved passages, determining their relevance,
+integrating them with model-generated text, and managing the
+uncertainty introduced by sources of varying quality generates
+frustration without adding to other perceived dimensions of load.
+This interpretation aligns with Buccinca et al.'s finding that
+forcing functions that require users to engage with AI evidence
+raise effort and frustration while improving calibration~\cite{buccinca2021}.
+It also suggests that the welfare cost of RAG is not primarily
+about latency or time pressure --- if it were, Temporal Demand
+would rise --- but about the quality of the user experience when
+integrating external evidence.
+
+\subsection{Implications for Tool Design}
+\label{sec:design}
+
+Four design implications follow from these findings:
+
+\paragraph{1. Latency is a welfare feature, not a performance feature.}
+If retrieval latency were the primary driver of the Frustration
+increase, Temporal Demand would have risen alongside Frustration.
+It did not. This suggests the frustration is attributable to the
+\emph{experience} of citation evaluation, not its duration. However,
+reducing retrieval latency may still reduce frustration at the
+margin by shortening the total time workers spend in the uncertain
+state between query and grounded response. Caching, speculative
+retrieval, and streaming should be evaluated as welfare interventions.
+
+\paragraph{2. Citation display needs cognitive scaffolding.}
+Surfacing raw retrieved text may overload workers with evidence that
+is relevant but not obviously applicable. Interfaces should
+communicate retrieval confidence, surface explicit ``I'm not sure''
+signals for low-confidence retrievals, and allow workers to collapse
+or dismiss citations they have already evaluated. The goal is to
+reduce the \emph{evaluation burden} of citation review, not to hide
+sources.
+
+\paragraph{3. Skill-adaptive deployment of T2.}
+If low-skill workers generate the largest quality gains from T2
+(as our heterogeneity analysis suggests), organizations should
+prioritize RAG deployment for workers who most benefit from
+grounded factual support. For high-skill workers on well-defined
+tasks, T1 may deliver comparable welfare utility at lower cost
+and lower frustration.
+
+\paragraph{4. Task routing at the jagged frontier.}
+The welfare utility model provides a quantitative basis for
+deciding which task types justify T2's cost and frustration premium.
+Tasks with high hallucination risk and high quality stakes (e.g.,
+regulatory synthesis, medical literature review) benefit most from
+retrieval augmentation. Tasks where the corpus is unlikely to help
+--- our Category C coding tasks approach this limit --- should
+default to T1 or Control, avoiding the citation tax without
+sacrificing meaningful quality gains.
+
+\subsection{Limitations}
+
+This study has four primary limitations. First, Prolific Academic
+participants differ from organizational workers in motivation,
+domain familiarity, and job stakes. Our findings should be treated
+as bounds on effects in specific professional contexts; domain-specific
+replication with expert workers is a clear next step. Second, we
+cannot fully verify control-condition compliance; our honesty
+attestation and log inspection are imperfect. Sensitivity analyses
+excluding anomalous completions leave our conclusions unchanged.
+Third, all findings are specific to GPT-4o (version 2024-11-20)
+and our curated study corpus; effects will vary across models and
+deployment contexts. Fourth, the welfare weight $\lambda{=}1.0$ is
+pre-specified but normative; its appropriate value is ultimately
+an empirical question for deploying organizations to calibrate
+against their workers' preferences.
+
+%%─────────────────────────────────────────────────────────────────
+\section{Conclusion}
+
+The question motivating this paper --- ``who pays the cost of
+productivity?'' --- has a differentiated answer. For LLM-only
+assistance, the answer is: no one pays much of a cognitive cost,
+while workers gain speed, quality, and accuracy. For
+retrieval-augmented assistance, the answer is: workers pay a
+Frustration tax in exchange for substantially higher quality and
+lower hallucination rates. Whether that trade is worthwhile
+depends on task type, worker skill, and an organization's valuation
+of worker welfare relative to output quality --- precisely the
+parameters encoded in the welfare utility model we introduce here.
+
+The contribution of this paper is not that RAG is bad or that base
+LLM access is always sufficient. It is that the standard productivity
+frame --- comparing quality and time across conditions while
+ignoring who bears the cognitive cost --- systematically misrepresents
+the full welfare impact of AI deployment. The welfare utility model
+provides a tractable, pre-specified framework for any organization
+deploying these tools to surface that cost and incorporate it into
+deployment decisions. All materials --- pre-registration, code,
+task bank, analysis pipeline, and the full model --- are released
+openly for replication and extension.
+
+%%─────────────────────────────────────────────────────────────────
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}

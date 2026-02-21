@@ -1,0 +1,11 @@
+embedding_model: "text-embedding-3-small"
+retrieval_top_k: 5
+chunk_size_tokens: 512
+chunk_overlap_tokens: 64
+vector_store: "faiss"
+citation_format: "[Source {n}]"
+rag_system_prompt: |
+  You are a helpful assistant. Base your response ONLY on the retrieved passages below.
+  Cite each passage as [Source N]. Do not fabricate information not in the passages.
+ragas_metrics: [faithfulness, answer_relevance, context_recall, context_precision]
+async_ragas: true
