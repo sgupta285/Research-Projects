@@ -70,9 +70,11 @@ class Portfolio:
 
         return max(0, int(target_value // px))
 
-    def _order_to_target_long(self, t: pd.Timestamp, symbol: str) -> Optional[OrderEvent]:
+    def _order_to_target_long(self, t: pd.Timestamp, symbol: str, target_weight: Optional[float] = None) -> Optional[OrderEvent]:
         eq = self.state.equity()
-        target_value = float(self.cfg.target_weight) * eq
+        w = float(self.cfg.target_weight if target_weight is None else target_weight)
+        w = max(0.0, min(w, float(self.cfg.max_weight)))
+        target_value = w * eq
         target_qty = self._cash_constrained_target_qty(symbol, target_value)
 
         current_qty = int(self.state.positions.get(symbol, 0))
@@ -86,7 +88,8 @@ class Portfolio:
     def on_signal(self, sig: SignalEvent) -> Optional[OrderEvent]:
         sym = sig.symbol
         if sig.side == "BUY":
-            return self._order_to_target_long(sig.t, sym)
+            eff_w = float(self.cfg.target_weight) * float(sig.strength)
+            return self._order_to_target_long(sig.t, sym, target_weight=eff_w)
 
         current_qty = int(self.state.positions.get(sym, 0))
         if current_qty <= 0:

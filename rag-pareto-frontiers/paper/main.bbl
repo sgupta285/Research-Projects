@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{29}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -9,37 +9,64 @@
 Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and Hannaneh Hajishirzi.
 \newblock Self-{RAG}: Learning to retrieve, generate, and critique through
   self-reflection.
-\newblock \emph{arXiv preprint arXiv:2310.11511}, 2024.
+\newblock In \emph{The Twelfth International Conference on Learning
+  Representations (ICLR)}, 2024.
+\newblock URL \url{https://openreview.net/forum?id=hSyW5go0v8}.
 
-\bibitem[Chen et~al.(2024{\natexlab{a}})Chen, Xiao, Zhang, Luo, Lian, and
-  Liu]{chen2024bge}
+\bibitem[Bang(2023)]{bang2023gptcache}
+Fu~Bang.
+\newblock {GPTCache}: An open-source semantic cache for {LLM} applications
+  enabling faster answers and cost savings.
+\newblock In \emph{Proceedings of the 3rd Workshop for Natural Language
+  Processing Open Source Software (NLP-OSS), EMNLP 2023}, pages 212--218.
+  Association for Computational Linguistics, 2023.
+
+\bibitem[Chen et~al.(2024)Chen, Xiao, Zhang, Luo, Lian, and Liu]{chen2024bge}
 Jianlv Chen, Shitao Xiao, Peitian Zhang, Kun Luo, Defu Lian, and Zheng Liu.
 \newblock {BGE} m3-embedding: Multi-lingual, multi-functionality,
   multi-granularity text embeddings through self-knowledge distillation.
-\newblock In \emph{arXiv preprint arXiv:2309.07597}, 2024{\natexlab{a}}.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  ACL 2024}, pages 2318--2335, Bangkok, Thailand, 2024. Association for
+  Computational Linguistics.
 
-\bibitem[Chen et~al.(2024{\natexlab{b}})Chen, Ye, Wu, Zheng, Ceze, and
-  Krishnamurthy]{chen2023accel}
-Lequn Chen, Zihao Ye, Yongji Wu, Danyang Zheng, Luis Ceze, and Arvind
-  Krishnamurthy.
-\newblock Punica: Multi-tenant {LoRA} serving.
-\newblock In \emph{Proceedings of Machine Learning and Systems (MLSys)},
-  2024{\natexlab{b}}.
+\bibitem[Cohen(1988)]{cohen1988power}
+Jacob Cohen.
+\newblock \emph{Statistical Power Analysis for the Behavioral Sciences}.
+\newblock Lawrence Erlbaum Associates, Hillsdale, NJ, 2nd edition, 1988.
 
-\bibitem[Es et~al.(2023)Es, James, Espinosa-Anke, and Schockaert]{es2023ragas}
+\bibitem[Cormack et~al.(2009)Cormack, Clarke, and Buettcher]{cormack2009rrf}
+Gordon~V. Cormack, Charles L.~A. Clarke, and Stefan Buettcher.
+\newblock Reciprocal rank fusion outperforms {C}ondorcet and individual rank
+  learning methods.
+\newblock In \emph{Proceedings of the 32nd International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, pages 758--759. ACM,
+  2009.
+
+\bibitem[Es et~al.(2024)Es, James, Espinosa-Anke, and Schockaert]{es2023ragas}
 Shahul Es, Jithin James, Luis Espinosa-Anke, and Steven Schockaert.
 \newblock {RAGAS}: Automated evaluation of retrieval augmented generation.
-\newblock \emph{arXiv preprint arXiv:2309.15217}, 2023.
+\newblock In \emph{Proceedings of the 18th Conference of the European Chapter
+  of the Association for Computational Linguistics: System Demonstrations
+  (EACL)}, pages 150--158, St.\ Julian's, Malta, 2024. Association for
+  Computational Linguistics.
 
-\bibitem[Guha et~al.(2023)Guha, Nyarko, Ho, R\'{e}, Chilton, Chohlas-Wood,
-  Peters, Waldon, Rockmore, Zambrano, et~al.]{guha2023legalbench}
-Neel Guha, Julian Nyarko, Daniel~E. Ho, Christopher R\'{e}, Adam Chilton, Alex
-  Chohlas-Wood, Austin Peters, Brandon Waldon, Daniel~N. Rockmore, Diego
-  Zambrano, et~al.
-\newblock {LegalBench}: A collaboratively built benchmark for measuring legal
-  reasoning in large language models.
-\newblock In \emph{Advances in Neural Information Processing Systems
-  (NeurIPS)}, 2023.
+\bibitem[Formal et~al.(2021)Formal, Piwowarski, and
+  Clinchant]{formal2021splade}
+Thibault Formal, Benjamin Piwowarski, and St\'{e}phane Clinchant.
+\newblock {SPLADE}: Sparse lexical and expansion model for first stage ranking.
+\newblock In \emph{Proceedings of the 44th International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, pages 2288--2292. ACM,
+  2021.
+
+\bibitem[Formal et~al.(2022)Formal, Piwowarski, Lassance, and
+  Clinchant]{formal2022splade2}
+Thibault Formal, Benjamin Piwowarski, Carlos Lassance, and St\'{e}phane
+  Clinchant.
+\newblock From distillation to hard negative sampling: Making sparse neural
+  {IR} models more effective.
+\newblock In \emph{Proceedings of the 45th International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, pages 2353--2359. ACM,
+  2022.
 
 \bibitem[Hofst\"{a}tter et~al.(2022)Hofst\"{a}tter, Lin, Yang, Lin, and
   Hanbury]{hofstaetter2022efficiently}
@@ -51,6 +78,12 @@ Sebastian Hofst\"{a}tter, Sheng-Chieh Lin, Jheng-Hong Yang, Jimmy Lin, and
   on Research and Development in Information Retrieval}, pages 113--122. ACM,
   2022.
 
+\bibitem[Johnson et~al.(2021)Johnson, Douze, and J{\'e}gou]{johnson2019faiss}
+Jeff Johnson, Matthijs Douze, and Herv{\'e} J{\'e}gou.
+\newblock Billion-scale similarity search with {GPU}s.
+\newblock \emph{IEEE Transactions on Big Data}, 7\penalty0 (3):\penalty0
+  535--547, 2021.
+
 \bibitem[Karpukhin et~al.(2020)Karpukhin, O\u{g}uz, Min, Lewis, Wu, Edunov,
   Chen, and Yih]{karpukhin2020dpr}
 Vladimir Karpukhin, Barlas O\u{g}uz, Sewon Min, Patrick Lewis, Ledell Wu,
@@ -59,6 +92,14 @@ Vladimir Karpukhin, Barlas O\u{g}uz, Sewon Min, Patrick Lewis, Ledell Wu,
 \newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
   Natural Language Processing (EMNLP)}, pages 6769--6781, Online, 2020.
   Association for Computational Linguistics.
+
+\bibitem[Khattab and Zaharia(2020)]{khattab2020colbert}
+Omar Khattab and Matei Zaharia.
+\newblock {ColBERT}: Efficient and effective passage search via contextualized
+  late interaction over {BERT}.
+\newblock In \emph{Proceedings of the 43rd International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, pages 39--48. ACM,
+  2020.
 
 \bibitem[Kim et~al.(2023)Kim, Hooper, Wattanawong, Kang, Yan, Genc, Dinh,
   Huang, Keutzer, Mahoney, et~al.]{kim2023full}
@@ -77,11 +118,12 @@ Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
 \newblock In \emph{Advances in Neural Information Processing Systems
   (NeurIPS)}, volume~33, pages 9459--9474, 2020.
 
-\bibitem[Lin et~al.(2022)Lin, Ma, and Lin]{lin2022aggretriever}
+\bibitem[Lin et~al.(2023)Lin, Ma, and Lin]{lin2022aggretriever}
 Sheng-Chieh Lin, Minghan Ma, and Jimmy Lin.
 \newblock Aggretriever: A simple approach to aggregate textual representations
   for robust dense passage retrieval.
-\newblock In \emph{arXiv preprint arXiv:2208.00511}, 2022.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  11:\penalty0 86--100, 2023.
 
 \bibitem[Ma et~al.(2023)Ma, Gong, He, Zhao, and Duan]{ma2023query}
 Xinbei Ma, Yeyun Gong, Pengcheng He, Hai Zhao, and Nan Duan.
@@ -102,6 +144,21 @@ Niklas Muennighoff, Nouamane Tazi, Lo{\"i}c Magne, and Nils Reimers.
 Rodrigo Nogueira and Kyunghyun Cho.
 \newblock Passage re-ranking with {BERT}.
 \newblock In \emph{arXiv preprint arXiv:1901.04085}, 2019.
+
+\bibitem[Oakes et~al.(2022)Oakes, Yang, Zhou, Houck, Harter, Arpaci-Dusseau,
+  and Arpaci-Dusseau]{oakes2022cold}
+Edward Oakes, Leon Yang, Dennis Zhou, Kevin Houck, Tyler Harter, Andrea~C.
+  Arpaci-Dusseau, and Remzi~H. Arpaci-Dusseau.
+\newblock Cold start latency in serverless computing: A systematic review,
+  taxonomy, and future directions.
+\newblock \emph{IEEE Transactions on Cloud Computing}, 10\penalty0
+  (4):\penalty0 2856--2869, 2022.
+
+\bibitem[Pipitone and Houir~Alami(2024)]{pipitone2024legalbenchrag}
+Nicholas Pipitone and Ghita Houir~Alami.
+\newblock {LegalBench-RAG}: A benchmark for retrieval-augmented generation in
+  the legal domain.
+\newblock \emph{arXiv preprint arXiv:2408.10343}, 2024.
 
 \bibitem[Reimers and Gurevych(2019)]{reimers2019sbert}
 Nils Reimers and Iryna Gurevych.
@@ -159,6 +216,12 @@ Liang Wang, Nan Yang, Xiaolong Huang, Linjun Yang, Rangan Majumder, and Furu
   for Computational Linguistics (ACL)}, pages 11897--11916, Bangkok, Thailand,
   2024. Association for Computational Linguistics.
 
+\bibitem[Wilson(1927)]{wilson1927probable}
+Edwin~B. Wilson.
+\newblock Probable inference, the law of succession, and statistical inference.
+\newblock \emph{Journal of the American Statistical Association}, 22\penalty0
+  (158):\penalty0 209--212, 1927.
+
 \bibitem[Yang et~al.(2018)Yang, Qi, Zhang, Bengio, Cohen, Salakhutdinov, and
   Manning]{yang2018hotpotqa}
 Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William~W. Cohen, Ruslan
@@ -168,11 +231,5 @@ Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William~W. Cohen, Ruslan
 \newblock In \emph{Proceedings of the 2018 Conference on Empirical Methods in
   Natural Language Processing (EMNLP)}, pages 2369--2380, Brussels, Belgium,
   2018. Association for Computational Linguistics.
-
-\bibitem[Zhu et~al.(2023)Zhu, Zhao, Liu, Gao, and Liu]{zhu2023cached}
-Lingjun Zhu, Zhuofei Zhao, Lianghao Liu, Yilun Gao, and Xinchen Liu.
-\newblock Cached model-as-a-resource: Provisioning large language model agents
-  for edge inference.
-\newblock In \emph{arXiv preprint arXiv:2403.05521}, 2023.
 
 \end{thebibliography}

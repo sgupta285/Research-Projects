@@ -1,0 +1,27 @@
+% LegalBench-RAG PrivacyQA span-level retrieval results (n=194 queries, K=12, chunk=250)
+\begin{table}[ht]
+\centering
+\small
+\caption{LegalBench-RAG PrivacyQA span-level retrieval results ($n=194$ queries,
+$K=12$, chunk\,=\,250 words).
+Recall@$K$ is computed at the character-span level: a retrieved chunk counts as
+a true positive only if its character range overlaps the annotated supporting span.
+Wilson 95\,\% CIs reported.
+On this domain, dense retrieval substantially outperforms BM25 (gap 0.509,
+$z=10.06$, $p<0.001$), reversing the domain pattern observed on HotpotQA.
+Pairwise: Dense--Hybrid ($\Delta = 0.076$, $z = 1.74$, $p = 0.082$, not significant);
+Hybrid--BM25 ($\Delta = 0.433$, $z = 8.53$, $p < 0.001$).
+Precision@12 = (chunks with span overlap in top-12)\,/\,12; low values
+reflect the strict character-span criterion and multi-document corpus
+(7 policies, 127 chunks).}
+\label{tab:legalbenchrag}
+\begin{tabular}{lcccc}
+\toprule
+Retrieval & Recall@12 & 95\,\% CI & Precision@12 & Warm latency (ms) \\
+\midrule
+BM25 & 0.282 & [0.223, 0.349] & 0.039 & 0.2 \\
+Dense & \textbf{0.791} & [0.729, 0.842] & 0.128 & 10.1 \\
+Hybrid & 0.715 & [0.648, 0.774] & 0.110 & 8.7 \\
+\bottomrule
+\end{tabular}
+\end{table}

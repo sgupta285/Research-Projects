@@ -1,0 +1,13 @@
+dataset: configs/datasets/legalbenchrag_privacy.yaml
+pricing: configs/pricing/default.yaml
+outputs: {out_dir: outputs/legalbenchrag}
+
+generation:
+  enabled: false
+
+grid:
+  retrieval.type: [bm25, dense, hybrid]
+  retrieval.top_k: [12]
+  chunking.chunk_size: [250]
+  chunking.overlap: [30]
+  rerank.enabled: [false]

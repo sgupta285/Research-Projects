@@ -3,18 +3,17 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{yang2018hotpotqa}
-\citation{guha2023legalbench}
 \citation{lewis2020rag}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
 \citation{robertson2009bm25}
 \citation{karpukhin2020dpr}
-\citation{lin2022aggretriever}
+\citation{cormack2009rrf,lin2022aggretriever}
 \citation{nogueira2019passage}
-\citation{zhu2023cached}
+\citation{bang2023gptcache}
 \citation{thakur2021beir}
 \citation{muennighoff2023mteb}
 \citation{es2023ragas}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
-\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
 \citation{lewis2020rag}
 \citation{karpukhin2020dpr}
 \citation{shao2023iter}
@@ -26,72 +25,164 @@
 \citation{es2023ragas}
 \citation{hofstaetter2022efficiently}
 \citation{kim2023full}
-\citation{chen2023accel}
+\citation{oakes2022cold}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
 \newlabel{sec:related}{{2}{2}{Related Work}{section.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Evaluation Harness and Experimental Controls}{2}{section.3}\protected@file@percent }
-\newlabel{sec:harness}{{3}{2}{Evaluation Harness and Experimental Controls}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Overview}{2}{subsection.3.1}\protected@file@percent }
-\citation{reimers2019sbert}
-\citation{yang2018hotpotqa}
-\citation{guha2023legalbench}
+\@writefile{toc}{\contentsline {paragraph}{RAG pipeline extensions.}{2}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Retrieval benchmarks.}{2}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Efficiency--effectiveness tradeoffs.}{2}{section*.3}\protected@file@percent }
+\citation{cormack2009rrf}
+\citation{lin2022aggretriever}
+\citation{formal2021splade,formal2022splade2}
+\citation{johnson2019faiss}
+\citation{khattab2020colbert}
+\citation{santhanam2022plaid}
+\@writefile{toc}{\contentsline {paragraph}{Hybrid retrieval.}{3}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dense retrieval infrastructure.}{3}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Evaluation Harness and Experimental Controls}{3}{section.3}\protected@file@percent }
+\newlabel{sec:harness}{{3}{3}{Evaluation Harness and Experimental Controls}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Overview}{3}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Decomposed Timing Model and Cold-Start Accounting}{3}{subsection.3.2}\protected@file@percent }
 \newlabel{sec:timing}{{3.2}{3}{Decomposed Timing Model and Cold-Start Accounting}{subsection.3.2}{}}
 \newlabel{eq:key}{{1}{3}{Decomposed Timing Model and Cold-Start Accounting}{equation.1}{}}
 \newlabel{eq:tcold}{{2}{3}{Decomposed Timing Model and Cold-Start Accounting}{equation.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Pipeline Configuration Space}{3}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Benchmark Datasets}{3}{section.4}\protected@file@percent }
-\newlabel{sec:benchmarks}{{4}{3}{Benchmark Datasets}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}HotpotQA}{3}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}LegalBench-RAG}{3}{subsection.4.2}\protected@file@percent }
-\citation{guha2023legalbench}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Metrics}{4}{section.5}\protected@file@percent }
-\newlabel{sec:metrics}{{5}{4}{Metrics}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Quality}{4}{subsection.5.1}\protected@file@percent }
-\newlabel{eq:recall}{{3}{4}{Quality}{equation.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Latency and Cost}{4}{subsection.5.2}\protected@file@percent }
-\newlabel{eq:cost}{{4}{4}{Latency and Cost}{equation.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{4}{section.6}\protected@file@percent }
-\newlabel{sec:results}{{6}{4}{Results}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Quality vs. Warm Latency}{4}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Quality vs. Cost}{5}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Cold-Start vs. Warm-Start Latency}{5}{subsection.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Chunking and Reranking Ablations}{5}{subsection.6.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{5}{section.7}\protected@file@percent }
-\newlabel{sec:discussion}{{7}{5}{Discussion}{section.7}{}}
+\newlabel{sec:configs}{{3.3}{3}{Pipeline Configuration Space}{subsection.3.3}{}}
+\citation{reimers2019sbert}
+\citation{johnson2019faiss}
+\citation{nogueira2019passage}
+\citation{yang2018hotpotqa}
+\citation{yang2018hotpotqa}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Hardware Specification}{4}{subsection.3.4}\protected@file@percent }
+\newlabel{sec:hardware}{{3.4}{4}{Hardware Specification}{subsection.3.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}LLM Generation Stage}{4}{subsection.3.5}\protected@file@percent }
+\newlabel{sec:generation}{{3.5}{4}{LLM Generation Stage}{subsection.3.5}{}}
+\citation{cohen1988power}
+\citation{pipitone2024legalbenchrag}
+\citation{wilson1927probable}
+\citation{agresti1998approximate}
+\citation{altman1991practical}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Benchmark Dataset}{5}{section.4}\protected@file@percent }
+\newlabel{sec:benchmarks}{{4}{5}{Benchmark Dataset}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}HotpotQA (Primary Evaluation)}{5}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}LegalBench-RAG (Supported Protocol)}{5}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:legalbench}{{4.2}{5}{LegalBench-RAG (Supported Protocol)}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Metrics}{5}{section.5}\protected@file@percent }
+\newlabel{sec:metrics}{{5}{5}{Metrics}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Retrieval Quality}{5}{subsection.5.1}\protected@file@percent }
+\newlabel{eq:recall}{{3}{5}{Retrieval Quality}{equation.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Confidence intervals.}{5}{section*.6}\protected@file@percent }
+\newlabel{eq:wilson}{{4}{5}{Confidence intervals}{equation.4}{}}
+\citation{johnson2019faiss}
+\@writefile{toc}{\contentsline {paragraph}{Statistical testing.}{6}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Latency}{6}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Cost}{6}{subsection.5.3}\protected@file@percent }
+\newlabel{eq:cost}{{5}{6}{Cost}{equation.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Generation Quality}{6}{subsection.5.4}\protected@file@percent }
+\newlabel{sec:gen_metrics}{{5.4}{6}{Generation Quality}{subsection.5.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{6}{section.6}\protected@file@percent }
+\newlabel{sec:results}{{6}{6}{Results}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Quality vs.\ Warm-Start Latency (Fixed $K=12$)}{6}{subsection.6.1}\protected@file@percent }
+\newlabel{sec:results_latency}{{6.1}{6}{Quality vs.\ Warm-Start Latency (Fixed $K=12$)}{subsection.6.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Pareto frontier of Recall@12 vs.\ warm-start latency at fixed $K=12$. Circle\,=\,BM25, square\,=\,dense, triangle\,=\,hybrid; solid-bordered markers are Pareto-optimal. Error bars show 95\,\% Wilson CIs. Dense no-rerank configurations (8.9--9.0\,ms) achieve both higher recall \emph  {and} lower latency than BM25 (10.7\,ms), placing all BM25 configurations off the warm Pareto frontier---a reversal visible only when cold-start costs are included (Figure~\ref {fig:cold_warm}). Note: reranked configs ($>$60\,ms) appear at the right edge.}}{7}{figure.1}\protected@file@percent }
+\newlabel{fig:pareto_latency}{{1}{7}{Pareto frontier of Recall@12 vs.\ warm-start latency at fixed $K=12$. Circle\,=\,BM25, square\,=\,dense, triangle\,=\,hybrid; solid-bordered markers are Pareto-optimal. Error bars show 95\,\% Wilson CIs. Dense no-rerank configurations (8.9--9.0\,ms) achieve both higher recall \emph {and} lower latency than BM25 (10.7\,ms), placing all BM25 configurations off the warm Pareto frontier---a reversal visible only when cold-start costs are included (Figure~\ref {fig:cold_warm}). Note: reranked configs ($>$60\,ms) appear at the right edge}{figure.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Statistical comparisons.}{7}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretation.}{7}{section*.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Recall@$K$ vs.\ per-query reranking latency overhead at fixed $K=12$. Triangles indicate reranked configurations (retrieve $2K=24$ candidates, cross-encode all 24 pairs, return top $K=12$); other markers are non-reranked. The cross-encoder (\texttt  {ms-marco-MiniLM-L-6-v2}) adds 42--47\,ms per query on CPU at zero API cost. The $2K$ pool expansion \emph  {does} improve Recall@12: BM25+rerank 0.846 vs.\ 0.797 ($+0.049$), Dense+rerank 0.881 vs.\ 0.838 ($+0.043$), Hybrid+rerank 0.917 vs.\ 0.890 ($+0.027$). The Pareto-optimal quality configuration is Hybrid+rerank (Recall@12\,=\,0.917, 64.4\,ms).}}{8}{figure.2}\protected@file@percent }
+\newlabel{fig:pareto_cost}{{2}{8}{Recall@$K$ vs.\ per-query reranking latency overhead at fixed $K=12$. Triangles indicate reranked configurations (retrieve $2K=24$ candidates, cross-encode all 24 pairs, return top $K=12$); other markers are non-reranked. The cross-encoder (\texttt {ms-marco-MiniLM-L-6-v2}) adds 42--47\,ms per query on CPU at zero API cost. The $2K$ pool expansion \emph {does} improve Recall@12: BM25+rerank 0.846 vs.\ 0.797 ($+0.049$), Dense+rerank 0.881 vs.\ 0.838 ($+0.043$), Hybrid+rerank 0.917 vs.\ 0.890 ($+0.027$). The Pareto-optimal quality configuration is Hybrid+rerank (Recall@12\,=\,0.917, 64.4\,ms)}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Quality vs.\ Reranking Overhead}{8}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:results_cost}{{6.2}{8}{Quality vs.\ Reranking Overhead}{subsection.6.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{2K pool expansion improves Recall@K.}{8}{section*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Latency--quality tradeoff.}{8}{section*.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Total cold-start latency $T_{\mathrm  {cold}}$ (log scale) vs.\ warm-start mean latency. The dashed diagonal marks $T_{\mathrm  {cold}} = T_{\mathrm  {warm}}$. BM25 configurations cluster at 133--136\,ms cold (index construction only) / 10.7\,ms warm (ratio $\approx \!13\times $). Dense and hybrid no-rerank configurations cluster at 11.5--14.4\,\textit  {seconds} cold / 8.9--23.6\,ms warm (ratio $\approx \!500$--$1{,}600\times $). At this corpus scale, dense cold-start is 85--108$\times $ higher than BM25 cold-start in absolute terms; the dominant cost is corpus encoding (90--92\,\% of cold-start, varying by chunk size), not model loading ($\approx \!8\,\%$).}}{9}{figure.3}\protected@file@percent }
+\newlabel{fig:cold_warm}{{3}{9}{Total cold-start latency $T_{\mathrm {cold}}$ (log scale) vs.\ warm-start mean latency. The dashed diagonal marks $T_{\mathrm {cold}} = T_{\mathrm {warm}}$. BM25 configurations cluster at 133--136\,ms cold (index construction only) / 10.7\,ms warm (ratio $\approx \!13\times $). Dense and hybrid no-rerank configurations cluster at 11.5--14.4\,\textit {seconds} cold / 8.9--23.6\,ms warm (ratio $\approx \!500$--$1{,}600\times $). At this corpus scale, dense cold-start is 85--108$\times $ higher than BM25 cold-start in absolute terms; the dominant cost is corpus encoding (90--92\,\% of cold-start, varying by chunk size), not model loading ($\approx \!8\,\%$)}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Cold-Start vs.\ Warm-Start Latency}{9}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:results_cold}{{6.3}{9}{Cold-Start vs.\ Warm-Start Latency}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Chunking and Reranking Ablations}{9}{subsection.6.4}\protected@file@percent }
+\newlabel{sec:ablations}{{6.4}{9}{Chunking and Reranking Ablations}{subsection.6.4}{}}
+\citation{cormack2009rrf,lin2022aggretriever}
+\citation{cormack2009rrf}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Recall@$K$ vs.\ $K$ by retrieval type (no reranking, averaged over chunk sizes). All types benefit monotonically from larger $K$; the ordering hybrid $>$ dense $>$ BM25 is stable across all evaluated $K$. Error bars show 95\,\% Wilson CIs.}}{10}{figure.4}\protected@file@percent }
+\newlabel{fig:recall_k}{{4}{10}{Recall@$K$ vs.\ $K$ by retrieval type (no reranking, averaged over chunk sizes). All types benefit monotonically from larger $K$; the ordering hybrid $>$ dense $>$ BM25 is stable across all evaluated $K$. Error bars show 95\,\% Wilson CIs}{figure.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Mixing weight $\alpha $.}{10}{section*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Pareto-optimal configurations.}{10}{section*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}End-to-End Generation Stage}{10}{subsection.6.5}\protected@file@percent }
+\newlabel{sec:results_gen}{{6.5}{10}{End-to-End Generation Stage}{subsection.6.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Chunk-size ablation: Recall@12 and warm latency at $K=12$, no reranking, overlap fixed at 30~words.}}{11}{table.1}\protected@file@percent }
+\newlabel{tab:chunking}{{1}{11}{Chunk-size ablation: Recall@12 and warm latency at $K=12$, no reranking, overlap fixed at 30~words}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Pareto-optimal retrieval configurations on HotpotQA (500 queries, dev\textsubscript  {distractor}, $K\in \{5,8,12\}$, overlap fixed at 30~words). Recall@$K$ with 95\,\% Wilson CI. Cost column reflects local CPU inference (zero API spend). Statistical comparisons at $K=12$: Hybrid+rerank vs.\ Hybrid no-rerank ($\Delta = +0.027$, $z = 1.45$, $p = 0.148$, not significant); Hybrid no-rerank vs.\ Dense no-rerank ($\Delta = +0.052$, $z = 2.40$, $p = 0.017$).}}{11}{table.2}\protected@file@percent }
+\newlabel{tab:pareto}{{2}{11}{Pareto-optimal retrieval configurations on HotpotQA (500 queries, dev\textsubscript {distractor}, $K\in \{5,8,12\}$, overlap fixed at 30~words). Recall@$K$ with 95\,\% Wilson CI. Cost column reflects local CPU inference (zero API spend). Statistical comparisons at $K=12$: Hybrid+rerank vs.\ Hybrid no-rerank ($\Delta = +0.027$, $z = 1.45$, $p = 0.148$, not significant); Hybrid no-rerank vs.\ Dense no-rerank ($\Delta = +0.052$, $z = 2.40$, $p = 0.017$)}{table.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Key finding: generation dominates retrieval latency.}{11}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Corpus-Scale Cold-Start Analysis}{11}{subsection.6.6}\protected@file@percent }
+\newlabel{sec:results_scale}{{6.6}{11}{Corpus-Scale Cold-Start Analysis}{subsection.6.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Linear scaling.}{11}{section*.15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Cold-start latency vs.\ corpus size (log--log scale) for BM25 and dense retrieval over 5 timing repeats each (error bars = $\pm 1$ std). Dense cold-start grows linearly with corpus size (slope $\approx 1$ in log--log), reaching $\approx $1.6\,minutes (96\,s) at 50K passages. BM25 cold-start also grows linearly but 48--75$\times $ slower (corpus-size dependent), remaining $<$2.1\,s at 50K passages. The ordering never crosses: BM25 cold-start is always faster than dense for any corpus size evaluated.}}{12}{figure.5}\protected@file@percent }
+\newlabel{fig:cold_scale}{{5}{12}{Cold-start latency vs.\ corpus size (log--log scale) for BM25 and dense retrieval over 5 timing repeats each (error bars = $\pm 1$ std). Dense cold-start grows linearly with corpus size (slope $\approx 1$ in log--log), reaching $\approx $1.6\,minutes (96\,s) at 50K passages. BM25 cold-start also grows linearly but 48--75$\times $ slower (corpus-size dependent), remaining $<$2.1\,s at 50K passages. The ordering never crosses: BM25 cold-start is always faster than dense for any corpus size evaluated}{figure.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{No crossover.}{12}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Practical breakpoints.}{12}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}LegalBench-RAG: Span-Level Retrieval Evaluation}{12}{subsection.6.7}\protected@file@percent }
+\newlabel{sec:legalbench_results}{{6.7}{12}{LegalBench-RAG: Span-Level Retrieval Evaluation}{subsection.6.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces LegalBench-RAG PrivacyQA span-level retrieval results ($n=194$ queries, $K=12$, chunk\,=\,250 words). Recall@$K$ is computed at the character-span level: a retrieved chunk counts as a true positive only if its character range overlaps the annotated supporting span. Wilson 95\,\% CIs reported. On this domain, dense retrieval substantially outperforms BM25 (gap 0.509, $z=10.06$, $p<0.001$), reversing the domain pattern observed on HotpotQA. Pairwise: Dense--Hybrid ($\Delta = 0.076$, $z = 1.74$, $p = 0.082$, not significant); Hybrid--BM25 ($\Delta = 0.433$, $z = 8.53$, $p < 0.001$). Precision@12 = (chunks with span overlap in top-12)\,/\,12; low values reflect the strict character-span criterion and multi-document corpus (7 policies, 127 chunks).}}{13}{table.3}\protected@file@percent }
+\newlabel{tab:legalbenchrag}{{3}{13}{LegalBench-RAG PrivacyQA span-level retrieval results ($n=194$ queries, $K=12$, chunk\,=\,250 words). Recall@$K$ is computed at the character-span level: a retrieved chunk counts as a true positive only if its character range overlaps the annotated supporting span. Wilson 95\,\% CIs reported. On this domain, dense retrieval substantially outperforms BM25 (gap 0.509, $z=10.06$, $p<0.001$), reversing the domain pattern observed on HotpotQA. Pairwise: Dense--Hybrid ($\Delta = 0.076$, $z = 1.74$, $p = 0.082$, not significant); Hybrid--BM25 ($\Delta = 0.433$, $z = 8.53$, $p < 0.001$). Precision@12 = (chunks with span overlap in top-12)\,/\,12; low values reflect the strict character-span criterion and multi-document corpus (7 policies, 127 chunks)}{table.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Domain reversal: dense retrieval dominates on specialized legal text.}{13}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Interpretation.}{13}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Practical implication.}{13}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Practitioner Guidelines}{13}{section.7}\protected@file@percent }
+\newlabel{sec:discussion}{{7}{13}{Practitioner Guidelines}{section.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{Tiered deployment framework.}{13}{section*.21}\protected@file@percent }
 \citation{wang2024text}
 \citation{chen2024bge}
-\citation{santhanam2022plaid}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Pareto frontier of retrieval quality (Recall@$k$) vs.\ warm end-to-end latency across 36 pipeline configurations on HotpotQA. Orange points lie on the Pareto frontier; blue points are dominated. BM25 variants cluster at 10--14\,ms; hybrid and dense variants cluster at 18--22\,ms, with no configuration falling between the two clusters.}}{6}{figure.1}\protected@file@percent }
-\newlabel{fig:pareto_latency}{{1}{6}{Pareto frontier of retrieval quality (Recall@$k$) vs.\ warm end-to-end latency across 36 pipeline configurations on HotpotQA. Orange points lie on the Pareto frontier; blue points are dominated. BM25 variants cluster at 10--14\,ms; hybrid and dense variants cluster at 18--22\,ms, with no configuration falling between the two clusters}{figure.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{6}{section.8}\protected@file@percent }
-\newlabel{sec:conclusion}{{8}{6}{Conclusion}{section.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Limitations and Future Work}{14}{section.8}\protected@file@percent }
+\newlabel{sec:limitations}{{8}{14}{Limitations and Future Work}{section.8}{}}
+\@writefile{toc}{\contentsline {paragraph}{Corpus scale and diversity.}{14}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Single encoder model.}{14}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{CPU-only evaluation.}{14}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Statistical power.}{14}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Generation evaluation.}{14}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{LegalBench-RAG coverage.}{14}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Unexplored design dimensions.}{14}{section*.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{14}{section.9}\protected@file@percent }
+\newlabel{sec:conclusion}{{9}{14}{Conclusion}{section.9}{}}
 \bibstyle{plainnat}
 \bibdata{refs}
 \bibcite{asai2024selfrag}{{1}{2024}{{Asai et~al.}}{{Asai, Wu, Wang, Sil, and Hajishirzi}}}
-\bibcite{chen2024bge}{{2}{2024{}}{{Chen et~al.}}{{Chen, Xiao, Zhang, Luo, Lian, and Liu}}}
-\bibcite{chen2023accel}{{3}{2024{}}{{Chen et~al.}}{{Chen, Ye, Wu, Zheng, Ceze, and Krishnamurthy}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Pareto frontier of retrieval quality (Recall@$k$) vs.\ mean per-query cost. Configurations without reranking incur zero marginal cost (left column); reranked configurations cluster at approximately $5 \times 10^{-5}$\,USD per query (right column), with a 0.05-point recall premium that may or may not justify the cost depending on application stakes.}}{7}{figure.2}\protected@file@percent }
-\newlabel{fig:pareto_cost}{{2}{7}{Pareto frontier of retrieval quality (Recall@$k$) vs.\ mean per-query cost. Configurations without reranking incur zero marginal cost (left column); reranked configurations cluster at approximately $5 \times 10^{-5}$\,USD per query (right column), with a 0.05-point recall premium that may or may not justify the cost depending on application stakes}{figure.2}{}}
-\bibcite{es2023ragas}{{4}{2023}{{Es et~al.}}{{Es, James, Espinosa-Anke, and Schockaert}}}
-\bibcite{guha2023legalbench}{{5}{2023}{{Guha et~al.}}{{Guha, Nyarko, Ho, R\'{e}, Chilton, Chohlas-Wood, Peters, Waldon, Rockmore, Zambrano, et~al.}}}
-\bibcite{hofstaetter2022efficiently}{{6}{2022}{{Hofst\"{a}tter et~al.}}{{Hofst\"{a}tter, Lin, Yang, Lin, and Hanbury}}}
-\bibcite{karpukhin2020dpr}{{7}{2020}{{Karpukhin et~al.}}{{Karpukhin, O\u {g}uz, Min, Lewis, Wu, Edunov, Chen, and Yih}}}
-\bibcite{kim2023full}{{8}{2023}{{Kim et~al.}}{{Kim, Hooper, Wattanawong, Kang, Yan, Genc, Dinh, Huang, Keutzer, Mahoney, et~al.}}}
-\bibcite{lewis2020rag}{{9}{2020}{{Lewis et~al.}}{{Lewis, Perez, Piktus, Petroni, Karpukhin, Goyal, K\"{u}ttler, Lewis, Yih, Rockt\"{a}schel, Riedel, and Kiela}}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Total cold-start latency vs.\ warm-start mean latency for all configurations. BM25 configurations (lower cluster) show negligible cold-start overhead. Dense configurations reach cold-start latencies up to 63\,ms---more than $3\times $ their warm latency---because sentence-transformer loading and FAISS index construction dominate first-query cost.}}{8}{figure.3}\protected@file@percent }
-\newlabel{fig:cold_warm}{{3}{8}{Total cold-start latency vs.\ warm-start mean latency for all configurations. BM25 configurations (lower cluster) show negligible cold-start overhead. Dense configurations reach cold-start latencies up to 63\,ms---more than $3\times $ their warm latency---because sentence-transformer loading and FAISS index construction dominate first-query cost}{figure.3}{}}
-\bibcite{lin2022aggretriever}{{10}{2022}{{Lin et~al.}}{{Lin, Ma, and Lin}}}
-\bibcite{ma2023query}{{11}{2023}{{Ma et~al.}}{{Ma, Gong, He, Zhao, and Duan}}}
-\bibcite{muennighoff2023mteb}{{12}{2023}{{Muennighoff et~al.}}{{Muennighoff, Tazi, Magne, and Reimers}}}
-\bibcite{nogueira2019passage}{{13}{2019}{{Nogueira and Cho}}{{}}}
-\bibcite{reimers2019sbert}{{14}{2019}{{Reimers and Gurevych}}{{}}}
-\bibcite{robertson2009bm25}{{15}{2009}{{Robertson and Zaragoza}}{{}}}
-\bibcite{santhanam2022plaid}{{16}{2022}{{Santhanam et~al.}}{{Santhanam, Khattab, Potts, and Zaharia}}}
-\bibcite{shao2023iter}{{17}{2023}{{Shao et~al.}}{{Shao, Gong, Shen, Huang, Duan, and Chen}}}
-\bibcite{thakur2021beir}{{18}{2021}{{Thakur et~al.}}{{Thakur, Reimers, R\"{u}ckl\'{e}, Srivastava, and Gurevych}}}
-\bibcite{trivedi2023interleaving}{{19}{2023}{{Trivedi et~al.}}{{Trivedi, Balasubramanian, Khot, and Sabharwal}}}
-\bibcite{wang2024text}{{20}{2024}{{Wang et~al.}}{{Wang, Yang, Huang, Yang, Majumder, and Wei}}}
-\bibcite{yang2018hotpotqa}{{21}{2018}{{Yang et~al.}}{{Yang, Qi, Zhang, Bengio, Cohen, Salakhutdinov, and Manning}}}
-\bibcite{zhu2023cached}{{22}{2023}{{Zhu et~al.}}{{Zhu, Zhao, Liu, Gao, and Liu}}}
-\gdef \@abspage@last{10}
+\bibcite{bang2023gptcache}{{2}{2023}{{Bang}}{{}}}
+\bibcite{chen2024bge}{{3}{2024}{{Chen et~al.}}{{Chen, Xiao, Zhang, Luo, Lian, and Liu}}}
+\bibcite{cohen1988power}{{4}{1988}{{Cohen}}{{}}}
+\bibcite{cormack2009rrf}{{5}{2009}{{Cormack et~al.}}{{Cormack, Clarke, and Buettcher}}}
+\bibcite{es2023ragas}{{6}{2024}{{Es et~al.}}{{Es, James, Espinosa-Anke, and Schockaert}}}
+\bibcite{formal2021splade}{{7}{2021}{{Formal et~al.}}{{Formal, Piwowarski, and Clinchant}}}
+\bibcite{formal2022splade2}{{8}{2022}{{Formal et~al.}}{{Formal, Piwowarski, Lassance, and Clinchant}}}
+\bibcite{hofstaetter2022efficiently}{{9}{2022}{{Hofst\"{a}tter et~al.}}{{Hofst\"{a}tter, Lin, Yang, Lin, and Hanbury}}}
+\bibcite{johnson2019faiss}{{10}{2021}{{Johnson et~al.}}{{Johnson, Douze, and J{\'e}gou}}}
+\bibcite{karpukhin2020dpr}{{11}{2020}{{Karpukhin et~al.}}{{Karpukhin, O\u {g}uz, Min, Lewis, Wu, Edunov, Chen, and Yih}}}
+\bibcite{khattab2020colbert}{{12}{2020}{{Khattab and Zaharia}}{{}}}
+\bibcite{kim2023full}{{13}{2023}{{Kim et~al.}}{{Kim, Hooper, Wattanawong, Kang, Yan, Genc, Dinh, Huang, Keutzer, Mahoney, et~al.}}}
+\bibcite{lewis2020rag}{{14}{2020}{{Lewis et~al.}}{{Lewis, Perez, Piktus, Petroni, Karpukhin, Goyal, K\"{u}ttler, Lewis, Yih, Rockt\"{a}schel, Riedel, and Kiela}}}
+\bibcite{lin2022aggretriever}{{15}{2023}{{Lin et~al.}}{{Lin, Ma, and Lin}}}
+\bibcite{ma2023query}{{16}{2023}{{Ma et~al.}}{{Ma, Gong, He, Zhao, and Duan}}}
+\bibcite{muennighoff2023mteb}{{17}{2023}{{Muennighoff et~al.}}{{Muennighoff, Tazi, Magne, and Reimers}}}
+\bibcite{nogueira2019passage}{{18}{2019}{{Nogueira and Cho}}{{}}}
+\bibcite{oakes2022cold}{{19}{2022}{{Oakes et~al.}}{{Oakes, Yang, Zhou, Houck, Harter, Arpaci-Dusseau, and Arpaci-Dusseau}}}
+\bibcite{pipitone2024legalbenchrag}{{20}{2024}{{Pipitone and Houir~Alami}}{{}}}
+\bibcite{reimers2019sbert}{{21}{2019}{{Reimers and Gurevych}}{{}}}
+\bibcite{robertson2009bm25}{{22}{2009}{{Robertson and Zaragoza}}{{}}}
+\bibcite{santhanam2022plaid}{{23}{2022}{{Santhanam et~al.}}{{Santhanam, Khattab, Potts, and Zaharia}}}
+\bibcite{shao2023iter}{{24}{2023}{{Shao et~al.}}{{Shao, Gong, Shen, Huang, Duan, and Chen}}}
+\bibcite{thakur2021beir}{{25}{2021}{{Thakur et~al.}}{{Thakur, Reimers, R\"{u}ckl\'{e}, Srivastava, and Gurevych}}}
+\bibcite{trivedi2023interleaving}{{26}{2023}{{Trivedi et~al.}}{{Trivedi, Balasubramanian, Khot, and Sabharwal}}}
+\bibcite{wang2024text}{{27}{2024}{{Wang et~al.}}{{Wang, Yang, Huang, Yang, Majumder, and Wei}}}
+\bibcite{wilson1927probable}{{28}{1927}{{Wilson}}{{}}}
+\bibcite{yang2018hotpotqa}{{29}{2018}{{Yang et~al.}}{{Yang, Qi, Zhang, Bengio, Cohen, Salakhutdinov, and Manning}}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Full Results Table}{18}{appendix.A}\protected@file@percent }
+\newlabel{app:full_results}{{A}{18}{Full Results Table}{appendix.A}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Complete results for all 36 fully factorial pipeline configurations on HotpotQA (500 queries). Overlap fixed at 30~words. $T_\mathrm  {cold}$ for BM25 = index build time only; for dense/hybrid = model-load ($\approx $10--14\,s) + index + first query.}}{18}{table.4}\protected@file@percent }
+\newlabel{tab:full_results}{{4}{18}{Complete results for all 36 fully factorial pipeline configurations on HotpotQA (500 queries). Overlap fixed at 30~words. $T_\mathrm {cold}$ for BM25 = index build time only; for dense/hybrid = model-load ($\approx $10--14\,s) + index + first query}{table.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Generation Stage Technical Validation ($n = 5$)}{18}{appendix.B}\protected@file@percent }
+\newlabel{app:generation_pilot}{{B}{18}{Generation Stage Technical Validation ($n = 5$)}{appendix.B}{}}
+\@writefile{toc}{\contentsline {paragraph}{Configuration.}{19}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Generation latency dominance.}{19}{section*.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Token F1 and EM misalignment.}{19}{section*.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Faithfulness.}{19}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limitations of this pilot.}{19}{section*.34}\protected@file@percent }
+\gdef \@abspage@last{19}

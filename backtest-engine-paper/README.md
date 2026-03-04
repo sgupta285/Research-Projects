@@ -21,9 +21,14 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Download & freeze data (Stooq, daily)
+### Download & freeze data (Yahoo Finance via yfinance, daily)
 ```bash
 python -m src.experiments.download_data --symbols SPY QQQ IWM DIA XLF XLK XLE XLV XLY XLP --start 2005-01-01
+```
+
+### Run tests
+```bash
+PYTHONPATH=. pytest -q
 ```
 
 ### Run experiments (includes period splits + bootstrap CIs)
@@ -31,11 +36,19 @@ python -m src.experiments.download_data --symbols SPY QQQ IWM DIA XLF XLK XLE XL
 python -m src.experiments.run_grid --config src/experiments/configs/default.yaml
 ```
 
+### Verify figure/table consistency (canonical artifact check)
+```bash
+python -m src.experiments.verify_figures --out_dir outputs
+```
+
 Outputs:
 - `outputs/tables/metrics.csv`
 - `outputs/tables/metrics_by_period.csv`
 - `outputs/tables/inflation_ratios.csv`
 - `outputs/tables/bootstrap_ci.csv`
+- `outputs/tables/fig_sharpe_by_model_values.csv`
+- `outputs/tables/fig_inflation_ratio_values.csv`
+- `outputs/tables/fig_heatmap_values.csv`
 - `outputs/figures/*.png`
 - `outputs/events/*.csv` (optional event logs)
 

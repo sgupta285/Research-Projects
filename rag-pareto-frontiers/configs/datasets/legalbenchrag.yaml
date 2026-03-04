@@ -1,4 +1,5 @@
 name: legalbenchrag
 root_dir: data/legalbenchrag
-benchmark_file: benchmarks/default.json
+# LegalBench-RAG benchmark file (see src/cli/download_legalbenchrag.py to acquire corpus)
+benchmark_file: benchmark.json
 max_examples: 800

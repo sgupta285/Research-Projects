@@ -1,0 +1,5 @@
+name: hotpotqa
+root_dir: data/hotpotqa
+split: dev_distractor
+# 50 examples for generation sweep (Ollama can be slow)
+max_examples: 50

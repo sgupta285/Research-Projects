@@ -1,0 +1,19 @@
+# Generation sweep: 3 retrieval types × 3 top-k values = 9 configurations
+# Uses Ollama llama3 (local, zero cost) for generation.
+# To use Anthropic: change backend to "anthropic" and set ANTHROPIC_API_KEY.
+dataset: configs/datasets/hotpotqa_dev_mini.yaml
+pricing: configs/pricing/default.yaml
+outputs: {out_dir: outputs}
+
+generation:
+  enabled: true
+  backend: ollama
+  model: llama3:latest
+  base_url: http://localhost:11434
+
+grid:
+  retrieval.type: [bm25, dense, hybrid]
+  retrieval.top_k: [5, 8, 12]
+  chunking.chunk_size: [250]
+  chunking.overlap: [30]
+  rerank.enabled: [false]

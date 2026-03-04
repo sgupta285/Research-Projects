@@ -1,0 +1,5 @@
+name: hotpotqa
+root_dir: data/hotpotqa
+split: dev_distractor
+# Pilot generation experiment: 5 examples (CPU Ollama inference is slow)
+max_examples: 5

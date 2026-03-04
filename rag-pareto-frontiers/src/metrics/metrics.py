@@ -1,11 +1,25 @@
 from __future__ import annotations
 import re
+from typing import List
 
 def _norm(s: str) -> str:
     s=s.lower()
     s=re.sub(r"[^a-z0-9\s]"," ",s)
     s=re.sub(r"\s+"," ",s).strip()
     return s
+
+def exact_match(pred: str, gold: str) -> float:
+    return 1.0 if _norm(pred) == _norm(gold) else 0.0
+
+def faithfulness(pred: str, passages: List[str]) -> float:
+    """Fraction of non-trivial answer tokens present in at least one passage."""
+    _STOP = {"a","an","the","is","are","was","were","of","in","on","at","to","and","or","it","its"}
+    ptoks = set(_norm(pred).split()) - _STOP
+    if not ptoks:
+        return 0.0
+    context = " ".join(p[:600] for p in passages)
+    ctx_toks = set(_norm(context).split())
+    return len(ptoks & ctx_toks) / len(ptoks)
 
 def token_f1(pred: str, gold: str) -> float:
     p=_norm(pred).split()

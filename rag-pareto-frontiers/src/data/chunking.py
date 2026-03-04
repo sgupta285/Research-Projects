@@ -34,12 +34,28 @@ def build_chunks(docs, mode: str, chunk_size: int, overlap: int) -> List[Chunk]:
     step = max(1, chunk_size - overlap)
     for d in docs:
         words = d.text.split()
+        if not words:
+            continue
+        # Build cumulative char start offsets for each word
+        char_starts: List[int] = []
+        pos = 0
+        for w in words:
+            idx = d.text.index(w, pos)
+            char_starts.append(idx)
+            pos = idx + len(w)
+
         for j in range(0, len(words), step):
             part = words[j:j+chunk_size]
-            if not part: break
+            if not part:
+                break
+            cs = char_starts[j]
+            last = min(j + len(part) - 1, len(words) - 1)
+            ce = char_starts[last] + len(words[last])
             chunks.append(Chunk(
                 chunk_id=f"{d.doc_id}::w{j}", doc_id=d.doc_id, title=d.title,
-                text=" ".join(part), source_path=getattr(d, "source_path", None)
+                text=" ".join(part), source_path=getattr(d, "source_path", None),
+                char_start=cs, char_end=ce
             ))
-            if j + chunk_size >= len(words): break
+            if j + chunk_size >= len(words):
+                break
     return chunks

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import signal
 from typing import Any, Dict
 import pandas as pd
 import yaml
@@ -9,17 +10,23 @@ import yaml
 from src.engine.backtest import Backtester
 from src.engine.portfolio import PortfolioConfig
 from src.engine.execution import ExecConfig
-from src.engine.strategy import TimeSeriesMomentum, MeanReversionZ
+from src.engine.strategy import TimeSeriesMomentum, MeanReversionZ, CrossSectionalMomentum
 from src.engine.logger import EventLogger
 from src.utils.io import ensure_dir, load_processed_symbols
-from src.experiments.make_figures import make_all_figures
+from src.experiments.make_figures import make_all_figures, export_paper_figures
 from src.experiments.bootstrap import block_bootstrap_sharpe
+from src.experiments.validate_cross_source import validate_against_stooq
 
 
 STRATEGY_REGISTRY = {
     "TimeSeriesMomentum": TimeSeriesMomentum,
     "MeanReversionZ": MeanReversionZ,
+    "CrossSectionalMomentum": CrossSectionalMomentum,
 }
+
+
+def _timeout_handler(signum, frame):
+    raise TimeoutError("Cross-source validation timed out")
 
 
 def load_config(path: str) -> Dict[str, Any]:
@@ -50,18 +57,66 @@ def main():
     ensure_dir(os.path.join(out_dir, "tables"))
     ensure_dir(os.path.join(out_dir, "figures"))
     ensure_dir(os.path.join(out_dir, "events"))
+    ensure_dir(os.path.join(out_dir, "audits"))
 
     log_enabled = bool(cfg.get("logging", {}).get("enable_event_log", False))
 
     bs_cfg = cfg.get("bootstrap", {})
     n_samples = int(bs_cfg.get("n_samples", 500))
-    block_size = int(bs_cfg.get("block_size", 10))
+    bootstrap_seed = int(bs_cfg.get("seed", 42))
+    primary_block_size = int(bs_cfg.get("primary_block_size", bs_cfg.get("block_size", 10)))
+    robustness_block_sizes = [int(b) for b in bs_cfg.get("robustness_block_sizes", [])]
 
     periods = cfg.get("periods", [{"name": "full", "start": "1900-01-01", "end": "2100-01-01"}])
+    full_period_cfg = next((p for p in periods if p.get("name") == "full"), None)
+    full_period = None if full_period_cfg is None else (full_period_cfg["start"], full_period_cfg["end"])
+    full_start = None if full_period is None else full_period[0]
+    full_end = None if full_period is None else full_period[1]
+
+    xsrc_cfg = cfg.get("cross_source_validation", {})
+    if bool(xsrc_cfg.get("enable", False)):
+        xsrc_out = os.path.join(out_dir, "tables", "cross_source_validation.csv")
+        xsrc_window = int(xsrc_cfg.get("window", 60))
+        xsrc_strict = bool(xsrc_cfg.get("strict", False))
+        xsrc_timeout = int(xsrc_cfg.get("timeout_seconds", 90))
+        try:
+            if xsrc_timeout > 0 and hasattr(signal, "SIGALRM") and hasattr(signal, "setitimer"):
+                prev_handler = signal.getsignal(signal.SIGALRM)
+                signal.signal(signal.SIGALRM, _timeout_handler)
+                signal.setitimer(signal.ITIMER_REAL, float(xsrc_timeout))
+                try:
+                    xsrc_df = validate_against_stooq(
+                        processed_data=data,
+                        symbols=symbols,
+                        window=xsrc_window,
+                        start=full_start,
+                        end=full_end,
+                    )
+                finally:
+                    signal.setitimer(signal.ITIMER_REAL, 0.0)
+                    signal.signal(signal.SIGALRM, prev_handler)
+            else:
+                xsrc_df = validate_against_stooq(
+                    processed_data=data,
+                    symbols=symbols,
+                    window=xsrc_window,
+                    start=full_start,
+                    end=full_end,
+                )
+            xsrc_df.to_csv(xsrc_out, index=False)
+            print(f"[OK] Saved {xsrc_out}")
+        except Exception as exc:
+            msg = f"Cross-source validation failed: {exc}"
+            if isinstance(exc, TimeoutError):
+                msg = f"Cross-source validation timed out after {xsrc_timeout}s"
+            if xsrc_strict:
+                raise RuntimeError(msg) from exc
+            print(f"[WARN] {msg}")
 
     rows = []
     by_period_rows = []
     ci_rows = []
+    ci_robust_rows = []
 
     for s_cfg in cfg["strategies"]:
         strat = STRATEGY_REGISTRY[s_cfg["type"]](**s_cfg.get("params", {}))
@@ -72,7 +127,17 @@ def main():
             exec_cfg = ExecConfig(**e_cfg.get("params", {}))
 
             logger = EventLogger(enabled=log_enabled)
-            bt = Backtester(data=data, strategy=strat, portfolio_cfg=port_cfg, exec_cfg=exec_cfg, logger=logger)
+            bt = Backtester(
+                data=data,
+                strategy=strat,
+                portfolio_cfg=port_cfg,
+                exec_cfg=exec_cfg,
+                logger=logger,
+                period=full_period,
+                mdd_audit_threshold=float(cfg.get("logging", {}).get("mdd_audit_threshold", -0.90)),
+                mdd_audit_dir=os.path.join(out_dir, "audits"),
+                run_label=f"{s_name}__{e_name}__full",
+            )
             res = bt.run()
 
             rows.append({
@@ -87,15 +152,34 @@ def main():
             eq_path = os.path.join(out_dir, "tables", f"equity_{s_name}__{e_name}.csv")
             res.equity.rename("equity").to_csv(eq_path, index=True)
 
-            lo, hi = block_bootstrap_sharpe(res.returns, n_samples=n_samples, block_size=block_size, seed=0)
+            lo, hi = block_bootstrap_sharpe(
+                res.returns, n_samples=n_samples, block_size=primary_block_size, seed=bootstrap_seed
+            )
             ci_rows.append({
                 "strategy": s_name,
                 "exec_model": e_name,
                 "sharpe_ci_lo": lo,
                 "sharpe_ci_hi": hi,
                 "bootstrap_n": n_samples,
-                "block_size": block_size,
+                "block_size": primary_block_size,
             })
+
+            bs_all = []
+            for b in [primary_block_size] + robustness_block_sizes:
+                if b > 0 and b not in bs_all:
+                    bs_all.append(b)
+            for b in bs_all:
+                lo_b, hi_b = block_bootstrap_sharpe(
+                    res.returns, n_samples=n_samples, block_size=b, seed=bootstrap_seed
+                )
+                ci_robust_rows.append({
+                    "strategy": s_name,
+                    "exec_model": e_name,
+                    "sharpe_ci_lo": lo_b,
+                    "sharpe_ci_hi": hi_b,
+                    "bootstrap_n": n_samples,
+                    "block_size": int(b),
+                })
 
             if log_enabled:
                 logger.flush_csv(os.path.join(out_dir, "events", f"events_{s_name}__{e_name}.csv"))
@@ -127,6 +211,9 @@ def main():
     ci_df = pd.DataFrame(ci_rows).sort_values(["strategy", "exec_model"])
     ci_path = os.path.join(out_dir, "tables", "bootstrap_ci.csv")
     ci_df.to_csv(ci_path, index=False)
+    ci_robust_df = pd.DataFrame(ci_robust_rows).sort_values(["strategy", "exec_model", "block_size"])
+    ci_robust_path = os.path.join(out_dir, "tables", "bootstrap_ci_robustness.csv")
+    ci_robust_df.to_csv(ci_robust_path, index=False)
 
     infl_rows = []
     for strat in metrics_df["strategy"].unique():
@@ -150,10 +237,12 @@ def main():
     infl_df.to_csv(infl_path, index=False)
 
     make_all_figures(metrics_path, out_dir)
+    export_paper_figures(out_dir=out_dir, paper_fig_dir="paper/figs")
 
     print("\nSaved:", metrics_path)
     print("Saved:", byp_path)
     print("Saved:", ci_path)
+    print("Saved:", ci_robust_path)
     print("Saved:", infl_path)
     print("Figures:", os.path.join(out_dir, "figures"))
 

@@ -19,6 +19,9 @@ strategies:
   - name: tsmom_60
     type: TimeSeriesMomentum
     params: {lookback: 60}
+  - name: csmom_60
+    type: CrossSectionalMomentum
+    params: {lookback: 60, top_k: 3}
   - name: meanrev_z1
     type: MeanReversionZ
     params: {window: 20, z_enter: 1.0}
@@ -39,10 +42,19 @@ execution_models:
 
 logging:
   enable_event_log: false
+  mdd_audit_threshold: -0.90
 
 bootstrap:
-  n_samples: 500
-  block_size: 10
+  n_samples: 1000
+  seed: 42
+  primary_block_size: 20
+  robustness_block_sizes: [10, 30]
+
+cross_source_validation:
+  enable: true
+  window: 60
+  strict: false
+  timeout_seconds: 90
 
 outputs:
   out_dir: outputs

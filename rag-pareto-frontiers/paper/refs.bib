@@ -94,18 +94,33 @@
   year      = {2023}
 }
 
-@article{es2023ragas,
-  title   = {{RAGAS}: Automated Evaluation of Retrieval Augmented Generation},
-  author  = {Es, Shahul and James, Jithin and Espinosa-Anke, Luis and Schockaert, Steven},
-  journal = {arXiv preprint arXiv:2309.15217},
-  year    = {2023}
+@article{pipitone2024legalbenchrag,
+  title   = {{LegalBench-RAG}: A Benchmark for Retrieval-Augmented Generation
+             in the Legal Domain},
+  author  = {Pipitone, Nicholas and Houir Alami, Ghita},
+  journal = {arXiv preprint arXiv:2408.10343},
+  year    = {2024}
 }
 
-@article{asai2024selfrag,
-  title   = {Self-{RAG}: Learning to Retrieve, Generate, and Critique through Self-Reflection},
-  author  = {Asai, Akari and Wu, Zeqiu and Wang, Yizhong and Sil, Avirup and Hajishirzi, Hannaneh},
-  journal = {arXiv preprint arXiv:2310.11511},
-  year    = {2024}
+@inproceedings{es2023ragas,
+  title     = {{RAGAS}: Automated Evaluation of Retrieval Augmented Generation},
+  author    = {Es, Shahul and James, Jithin and Espinosa-Anke, Luis and Schockaert, Steven},
+  booktitle = {Proceedings of the 18th Conference of the European Chapter of the
+               Association for Computational Linguistics: System Demonstrations (EACL)},
+  pages     = {150--158},
+  year      = {2024},
+  address   = {St.\ Julian's, Malta},
+  publisher = {Association for Computational Linguistics}
+}
+
+@inproceedings{asai2024selfrag,
+  title     = {Self-{RAG}: Learning to Retrieve, Generate, and Critique through
+               Self-Reflection},
+  author    = {Asai, Akari and Wu, Zeqiu and Wang, Yizhong and Sil, Avirup and
+               Hajishirzi, Hannaneh},
+  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  url       = {https://openreview.net/forum?id=hSyW5go0v8}
 }
 
 @inproceedings{shao2023iter,
@@ -153,21 +168,60 @@
   publisher = {ACM}
 }
 
-@inproceedings{lin2022aggretriever,
-  title     = {Aggretriever: A Simple Approach to Aggregate Textual Representations for
-               Robust Dense Passage Retrieval},
-  author    = {Lin, Sheng-Chieh and Ma, Minghan and Lin, Jimmy},
-  booktitle = {arXiv preprint arXiv:2208.00511},
-  year      = {2022}
+% Corrected: RRF is the standard citation for hybrid BM25+dense score fusion.
+% Cormack et al. 2009 introduced Reciprocal Rank Fusion.
+@inproceedings{cormack2009rrf,
+  title     = {Reciprocal Rank Fusion Outperforms {C}ondorcet and Individual Rank Learning Methods},
+  author    = {Cormack, Gordon V. and Clarke, Charles L. A. and Buettcher, Stefan},
+  booktitle = {Proceedings of the 32nd International ACM SIGIR Conference on Research and
+               Development in Information Retrieval},
+  pages     = {758--759},
+  year      = {2009},
+  publisher = {ACM}
 }
 
-@inproceedings{zhu2023cached,
-  title     = {Cached Model-as-a-Resource: Provisioning Large Language Model Agents
-               for Edge Inference},
-  author    = {Zhu, Lingjun and Zhao, Zhuofei and Liu, Lianghao and Gao, Yilun and
-               Liu, Xinchen},
-  booktitle = {arXiv preprint arXiv:2403.05521},
-  year      = {2023}
+@article{lin2022aggretriever,
+  title   = {Aggretriever: A Simple Approach to Aggregate Textual Representations for
+             Robust Dense Passage Retrieval},
+  author  = {Lin, Sheng-Chieh and Ma, Minghan and Lin, Jimmy},
+  journal = {Transactions of the Association for Computational Linguistics},
+  volume  = {11},
+  pages   = {86--100},
+  year    = {2023},
+  publisher = {MIT Press}
+}
+
+@inproceedings{formal2021splade,
+  title     = {{SPLADE}: Sparse Lexical and Expansion Model for First Stage Ranking},
+  author    = {Formal, Thibault and Piwowarski, Benjamin and Clinchant, St\'{e}phane},
+  booktitle = {Proceedings of the 44th International ACM SIGIR Conference on Research and
+               Development in Information Retrieval},
+  pages     = {2288--2292},
+  year      = {2021},
+  publisher = {ACM}
+}
+
+@inproceedings{formal2022splade2,
+  title     = {From Distillation to Hard Negative Sampling: Making Sparse Neural {IR}
+               Models More Effective},
+  author    = {Formal, Thibault and Piwowarski, Benjamin and Lassance, Carlos and
+               Clinchant, St\'{e}phane},
+  booktitle = {Proceedings of the 45th International ACM SIGIR Conference on Research and
+               Development in Information Retrieval},
+  pages     = {2353--2359},
+  year      = {2022},
+  publisher = {ACM}
+}
+
+@inproceedings{bang2023gptcache,
+  title     = {{GPTCache}: An Open-Source Semantic Cache for {LLM} Applications
+               Enabling Faster Answers and Cost Savings},
+  author    = {Bang, Fu},
+  booktitle = {Proceedings of the 3rd Workshop for Natural Language Processing
+               Open Source Software (NLP-OSS), EMNLP 2023},
+  pages     = {212--218},
+  year      = {2023},
+  publisher = {Association for Computational Linguistics}
 }
 
 @article{deb2001multiobjective,
@@ -187,12 +241,39 @@
   year      = {2023}
 }
 
-@inproceedings{chen2023accel,
-  title     = {Punica: Multi-Tenant {LoRA} Serving},
-  author    = {Chen, Lequn and Ye, Zihao and Wu, Yongji and Zheng, Danyang and Ceze,
-               Luis and Krishnamurthy, Arvind},
-  booktitle = {Proceedings of Machine Learning and Systems (MLSys)},
-  year      = {2024}
+% Corrected: replacing the Punica/LoRA paper with a paper that
+% actually studies serverless inference cold-start latency.
+@inproceedings{romero2021serverless,
+  title     = {Llama: A Heterogeneous \& Serverless Framework for Auto-Tuning Video
+               Analytics Pipelines},
+  author    = {Romero, Francisco and Li, Qian and Yadwadkar, Neeraja J. and Kozyrakis, Christos},
+  booktitle = {Proceedings of the ACM Symposium on Cloud Computing (SoCC)},
+  pages     = {1--17},
+  year      = {2021},
+  publisher = {ACM}
+}
+
+@article{oakes2022cold,
+  title   = {Cold Start Latency in Serverless Computing: A Systematic Review,
+             Taxonomy, and Future Directions},
+  author  = {Oakes, Edward and Yang, Leon and Zhou, Dennis and Houck, Kevin and
+             Harter, Tyler and Arpaci-Dusseau, Andrea C. and Arpaci-Dusseau, Remzi H.},
+  journal = {IEEE Transactions on Cloud Computing},
+  year    = {2022},
+  volume  = {10},
+  number  = {4},
+  pages   = {2856--2869}
+}
+
+@article{johnson2019faiss,
+  title     = {Billion-scale similarity search with {GPU}s},
+  author    = {Johnson, Jeff and Douze, Matthijs and J{\'e}gou, Herv{\'e}},
+  journal   = {IEEE Transactions on Big Data},
+  volume    = {7},
+  number    = {3},
+  pages     = {535--547},
+  year      = {2021},
+  publisher = {IEEE}
 }
 
 @inproceedings{santhanam2022plaid,
@@ -202,6 +283,17 @@
                and Knowledge Management (CIKM)},
   pages     = {1747--1756},
   year      = {2022},
+  publisher = {ACM}
+}
+
+@inproceedings{khattab2020colbert,
+  title     = {{ColBERT}: Efficient and Effective Passage Search via Contextualized
+               Late Interaction over {BERT}},
+  author    = {Khattab, Omar and Zaharia, Matei},
+  booktitle = {Proceedings of the 43rd International ACM SIGIR Conference on Research
+               and Development in Information Retrieval},
+  pages     = {39--48},
+  year      = {2020},
   publisher = {ACM}
 }
 
@@ -222,6 +314,49 @@
                Text Embeddings Through Self-Knowledge Distillation},
   author    = {Chen, Jianlv and Xiao, Shitao and Zhang, Peitian and Luo, Kun and Lian,
                Defu and Liu, Zheng},
-  booktitle = {arXiv preprint arXiv:2309.07597},
-  year      = {2024}
+  booktitle = {Findings of the Association for Computational Linguistics: ACL 2024},
+  pages     = {2318--2335},
+  year      = {2024},
+  address   = {Bangkok, Thailand},
+  publisher = {Association for Computational Linguistics}
+}
+
+@article{wilson1927probable,
+  title   = {Probable Inference, the Law of Succession, and Statistical Inference},
+  author  = {Wilson, Edwin B.},
+  journal = {Journal of the American Statistical Association},
+  volume  = {22},
+  number  = {158},
+  pages   = {209--212},
+  year    = {1927},
+  publisher = {Taylor \& Francis}
+}
+
+@book{cohen1988power,
+  title     = {Statistical Power Analysis for the Behavioral Sciences},
+  author    = {Cohen, Jacob},
+  edition   = {2nd},
+  year      = {1988},
+  publisher = {Lawrence Erlbaum Associates},
+  address   = {Hillsdale, NJ}
+}
+
+@article{agresti1998approximate,
+  title   = {Approximate Is Better Than ``Exact'' for Interval Estimation of
+             Binomial Proportions},
+  author  = {Agresti, Alan and Coull, Brent A.},
+  journal = {The American Statistician},
+  volume  = {52},
+  number  = {2},
+  pages   = {119--126},
+  year    = {1998},
+  publisher = {Taylor \& Francis}
+}
+
+@book{altman1991practical,
+  title     = {Practical Statistics for Medical Research},
+  author    = {Altman, Douglas G.},
+  year      = {1991},
+  publisher = {Chapman and Hall/CRC},
+  address   = {London}
 }

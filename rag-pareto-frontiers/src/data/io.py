@@ -42,39 +42,62 @@ def load_hotpotqa(root_dir: str, split: str, max_examples: int = 500):
     return docs, qa
 
 def load_legalbenchrag(root_dir: str, benchmark_file: str, max_examples: int = 800):
+    """Load LegalBench-RAG benchmark (ZeroEntropy format).
+
+    Handles the actual corpus format from https://github.com/zeroentropy-ai/legalbenchrag:
+      {"tests": [{"query": ..., "snippets": [{"file_path": ..., "span": [s, e], ...}]}]}
+    Also handles legacy formats with test_cases/ground_truth keys.
+    """
     import json
     bench_path = os.path.join(root_dir, benchmark_file)
     with open(bench_path, "r", encoding="utf-8") as f:
         bench = json.load(f)
 
-    cases = bench.get("test_cases", bench if isinstance(bench, list) else [])
+    # Normalise to a list of cases
+    if isinstance(bench, list):
+        cases = bench
+    elif "tests" in bench:          # actual ZeroEntropy format
+        cases = bench["tests"]
+    elif "test_cases" in bench:
+        cases = bench["test_cases"]
+    else:
+        cases = list(bench.values())[0] if bench else []
     cases = cases[:max_examples]
 
-    needed = set()
+    # Collect all corpus file paths needed
+    needed: set = set()
     for c in cases:
-        for s in c.get("ground_truth", c.get("ground_truth_snippets", [])) or []:
-            p = s.get("path") or s.get("file_path") or s.get("corpus_path")
-            if p: needed.add(p)
+        snippets = c.get("snippets") or c.get("ground_truth") or c.get("ground_truth_snippets") or []
+        for s in snippets:
+            p = s.get("file_path") or s.get("path") or s.get("corpus_path")
+            if p:
+                needed.add(p)
 
-    docs = []
+    # Load corpus documents (text files, one per legal document)
+    docs: List[Doc] = []
     for p in sorted(needed):
-        abs_p = os.path.join(root_dir, "corpus", p)
-        if not os.path.exists(abs_p):
-            abs_p = os.path.join(root_dir, p)
-        with open(abs_p, "r", encoding="utf-8") as f:
-            txt = f.read()
-        docs.append(Doc(doc_id=p, title=os.path.basename(p), text=txt, source_path=p))
+        for candidate in [
+            os.path.join(root_dir, "corpus", p),
+            os.path.join(root_dir, p),
+        ]:
+            if os.path.exists(candidate):
+                with open(candidate, "r", encoding="utf-8", errors="replace") as f:
+                    txt = f.read()
+                docs.append(Doc(doc_id=p, title=os.path.basename(p), text=txt, source_path=p))
+                break
 
-    qa = []
+    # Build QA pairs
+    qa: List[QA] = []
     for i, c in enumerate(cases):
-        qid = c.get("id") or c.get("_id") or str(i)
-        question = c.get("query") or c.get("question")
-        gts = c.get("ground_truth", c.get("ground_truth_snippets", [])) or []
-        gold_sources = []
-        for s in gts:
-            p = s.get("path") or s.get("file_path") or s.get("corpus_path")
-            start = s.get("start") or s.get("start_idx") or s.get("char_start")
-            end = s.get("end") or s.get("end_idx") or s.get("char_end")
+        qid = str(c.get("id") or c.get("_id") or i)
+        question = c.get("query") or c.get("question") or ""
+        snippets = c.get("snippets") or c.get("ground_truth") or c.get("ground_truth_snippets") or []
+        gold_sources: List[Dict[str, Any]] = []
+        for s in snippets:
+            p = s.get("file_path") or s.get("path") or s.get("corpus_path")
+            span = s.get("span")      # [start, end] in ZeroEntropy format
+            start = span[0] if span else (s.get("start") or s.get("start_idx") or s.get("char_start"))
+            end   = span[1] if span else (s.get("end")   or s.get("end_idx")   or s.get("char_end"))
             if p is not None and start is not None and end is not None:
                 gold_sources.append({"source_path": p, "start": int(start), "end": int(end)})
         qa.append(QA(qid=qid, question=question, gold_sources=gold_sources or None))

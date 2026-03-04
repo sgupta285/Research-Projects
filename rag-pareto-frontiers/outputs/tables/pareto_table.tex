@@ -1,0 +1,15 @@
+\begin{table}[ht]
+\centering
+\small
+\caption{Pareto-optimal retrieval configurations on HotpotQA (500 queries, dev\textsubscript{distractor}, $K\in\{5,8,12\}$, overlap fixed at 30~words). Recall@$K$ with 95\,\% Wilson CI. Cost column reflects local CPU inference (zero API spend). Statistical comparisons at $K=12$: Hybrid+rerank vs.\ Hybrid no-rerank ($\Delta = +0.027$, $z = 1.45$, $p = 0.148$, not significant); Hybrid no-rerank vs.\ Dense no-rerank ($\Delta = +0.052$, $z = 2.40$, $p = 0.017$).}
+\label{tab:pareto}
+\begin{tabular}{lccclccc}
+\toprule
+Type & $K$ & Chunk & Rerank & Recall@$K$ (95\% CI) & $\bar{T}_\mathrm{warm}$ (ms) & $T_\mathrm{cold}$ & $C_q$ (USD) \\
+\midrule
+Hybrid & 12 & 250 & Yes & 0.917 (0.890--0.938) & 64.4 & 11.7\,s & 0.00e+00 \\
+Hybrid & 12 & 250 & No & 0.890 (0.860--0.915) & 22.3 & 11.7\,s & 0.00e+00 \\
+Dense & 12 & 250 & No & 0.838 (0.803--0.868) & 8.9 & 11.5\,s & 0.00e+00 \\
+\bottomrule
+\end{tabular}
+\end{table}

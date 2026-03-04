@@ -1,0 +1,20 @@
+\begin{table}[ht]
+\centering
+\small
+\caption{Chunk-size ablation: Recall@12 and warm latency at $K=12$, no reranking, overlap fixed at 30~words.}
+\label{tab:chunking}
+\begin{tabular}{lccc}
+\toprule
+Type & Chunk (words) & Recall@12 (95\% CI) & $\bar{T}_\mathrm{warm}$ (ms) \\
+\midrule
+BM25 & 150 & 0.798 (0.761--0.831) & 10.7 \\
+BM25 & 250 & 0.797 (0.760--0.830) & 10.7 \\
+\midrule
+Dense & 150 & 0.829 (0.794--0.859) & 9.0 \\
+Dense & 250 & 0.838 (0.803--0.868) & 8.9 \\
+\midrule
+Hybrid & 150 & 0.886 (0.855--0.911) & 23.6 \\
+Hybrid & 250 & 0.890 (0.860--0.915) & 22.3 \\
+\bottomrule
+\end{tabular}
+\end{table}

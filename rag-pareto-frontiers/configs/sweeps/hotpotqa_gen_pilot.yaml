@@ -1,0 +1,18 @@
+# Pilot generation sweep: 3 retrieval types × 1 k value = 3 configurations
+# 5 queries only — use to measure per-query LLM latency on local CPU
+dataset: configs/datasets/hotpotqa_gen_pilot.yaml
+pricing: configs/pricing/default.yaml
+outputs: {out_dir: outputs}
+
+generation:
+  enabled: true
+  backend: ollama
+  model: llama3:latest
+  base_url: http://localhost:11434
+
+grid:
+  retrieval.type: [bm25, dense, hybrid]
+  retrieval.top_k: [12]
+  chunking.chunk_size: [250]
+  chunking.overlap: [30]
+  rerank.enabled: [false]

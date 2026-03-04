@@ -1,0 +1,4 @@
+name: legalbenchrag
+root_dir: data/legalbenchrag
+benchmark_file: benchmarks/privacy_qa.json
+max_examples: 194

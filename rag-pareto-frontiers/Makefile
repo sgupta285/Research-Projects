@@ -12,6 +12,6 @@ sweep:
 pareto:
 	. .venv/bin/activate && python -m src.cli.make_pareto --results outputs/tables/sweep_results.csv
 test:
-	. .venv/bin/activate && pytest -q
+	. .venv/bin/activate && python -m pytest -q
 paper:
 	cd paper && latexmk -pdf -interaction=nonstopmode main.tex
